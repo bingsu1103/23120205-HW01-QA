@@ -1,0 +1,14 @@
+# macOS metadata
+.DS_Store
+
+# Personal and anti-cheat evidence must not be published
+private-evidence/
+
+# Moodle submission archives may contain private evidence
+submission/*.zip
+
+# Temporarily exclude the working AI prompt log
+ai/prompt-log.md
+
+# Temporarily exclude the working AI audit report
+ai/ai-audit-report.md
