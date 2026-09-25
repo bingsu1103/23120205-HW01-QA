@@ -150,4 +150,4 @@ mindmap
 | M-02 | Monitoring/control products omitted risk information and substituted updated plans and schedules. | The branch now contains progress reports, documentation of control directives and information about risks. | Section 1.4.3 |
 | M-03 | Completion products included archived testware but omitted change requests. | Archiving remains a completion activity; the work products now include action items, documented lessons learned and change requests. | Sections 1.4.1 and 1.4.3 |
 
-Full reasoning and the AI-assistance disclosure are recorded in `ai/mindmap/review-notes.md` and `ai/ai-audit-report.md`.
+The correction table above records the three findings and their ISTQB basis. The corresponding AI-assistance disclosure is recorded in `ai/ai-audit-report.md`.
