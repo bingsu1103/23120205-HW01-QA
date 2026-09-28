@@ -7,6 +7,25 @@ private-evidence/
 # Moodle submission archives may contain private evidence
 submission/*.zip
 
+# Completed Moodle package contains identity images and signed forms
+submission/
+
+# Filled AI forms contain personal information and signatures
+ai/23120205_AI-*_filled.docx
+
+# Official assignment and blank course templates are local reference material
+2026.HW01.Jobs.Defects.PhysicalProduct_En.pdf
+ai/templates/
+
+# LaTeX build products; keep the authored source only
+report/main.aux
+report/main.log
+report/main.lot
+report/main.out
+report/main.pdf
+report/main.toc
+report/HW01_Report.pdf
+
 # Temporarily exclude the working AI prompt log
 ai/prompt-log.md
 
