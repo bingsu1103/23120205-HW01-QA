@@ -1,0 +1,71 @@
+\documentclass[12pt]{article}
+
+\usepackage{hcmus-report-template}
+\usepackage{fontspec}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{xurl}
+\usepackage{caption}
+
+% Disable indentation on new paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{2em}
+
+% Line spacing 1.5
+\renewcommand{\baselinestretch}{1.5}
+
+% Optional: graphic path
+% \graphicspath{PATH_TO_GRAPHIC_FOLDER}
+
+% To use Times font family, uncomment this row
+% \usepackage{mathptmx}
+
+% To use roman section / subsection, uncomment these rows
+% \renewcommand{\thesection}{\Roman{section}}
+% \renewcommand{\thesubsection}{\thesection.\Roman{subsection}}
+
+% Report identity.
+\newcommand{\coursename}{CS423 / CSC13003 - Software Testing}
+\newcommand{\reportname}{Job Market, Software Defects and Physical Product Testing}
+\newcommand{\reporttitle}{HW01 Report}
+\newcommand{\reportdate}{27 September 2026}
+
+\newcommand{\studentname}{Ngô Gia An (23120205)}
+\newcommand{\teachername}{Hồ Tuấn Thanh}
+\newcommand{\pending}[1]{\textbf{PENDING EVIDENCE:} #1}
+
+% Header
+\lhead{\reporttitle}
+\rhead{
+Trường Đại học Khoa học Tự nhiên - ĐHQG HCM\\
+\coursename
+}
+
+% Footer
+\newcommand{\leftfooter}{Ngô Gia An - 23120205}
+\lfoot{\leftfooter}
+
+% ============ DOCUMENT ============
+\begin{document}
+
+\pagenumbering{roman}
+\input{content/title.tex}
+
+\tableofcontents
+\pagebreak
+\listoftables
+\pagebreak
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{content/report-body}
+
+% Appendix
+\appendix
+\input{appendix/appendix.tex}
+\end{document}
