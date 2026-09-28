@@ -1,0 +1,2204 @@
+\section{Executive Summary}
+
+This report presents the results of HW01 for the Software Testing course. It analyzes ten recent QA/QC job postings, reviews twenty software defects publicized from 2022 to 2026, and documents a fifteen-case test design for a Senko B113 standing fan. Four job postings explicitly require AI or LLM-related skills, six of the reviewed software defects are AI-related, and every defect entry contains a specific correction of an AI-biased, hallucinated or incomplete explanation. The physical-product work records eight PASS results, seven FAIL results and three student edge cases. The device-and-student-card photograph, three edge-case conversation screenshots, two mindmap-generation screenshots, five narrated video links, seven GitHub Issues and the updated Issues-page screenshot are available. All fifteen test cases, including the three edge cases, have final Actual Results and verdicts.
+
+\begin{table}[H]\centering
+
+\caption{Current HW01 completion status}
+
+\begin{tabular}{p{0.30\textwidth}p{0.16\textwidth}p{0.42\textwidth}}\toprule
+
+Area & Status & Evidence summary \\\midrule
+
+Requirement 1 & Complete & 10 jobs, 4 AI-related, 10 screenshots available \\
+
+Requirement 2 & Complete & 20 defects, 6 AI-related, 20 AI-review corrections \\
+
+Requirement 3 design & Complete & 15 cases, 3 student edge cases, 7 reported failed observations \\
+
+Requirement 3 evidence & Complete & All 15 cases executed with final verdicts; device photo, 5 narrated videos, 7 GitHub Issues and updated Issues screenshot available \\
+
+AI compliance & Mostly complete & AI-02, signed AI-03, signed AI-05 and AI-06 are available; prompt-log timestamp metadata is student supplied and was not independently verified \\\bottomrule
+
+\end{tabular}\end{table}
+
+\clearpage\section{G9.1 QA QC Role Mindmap Review}
+
+Gemini Flash generated the original QA/QC role mindmap from the ISTQB CTFL v4.0.1 process. I compared the output with Sections 1.4.1, 1.4.3 and 1.4.5 of the syllabus and identified exactly three correction areas. The original and corrected Mermaid artifacts are included in the submission repository.
+
+\begin{longtable}{p{0.09\textwidth}p{0.27\textwidth}p{0.31\textwidth}p{0.23\textwidth}}
+
+\caption{Three corrections to the AI-generated mindmap}\\\toprule
+
+ID & AI problem & Student correction & ISTQB basis \\\midrule\endfirsthead
+
+\toprule ID & AI problem & Student correction & ISTQB basis \\\midrule\endhead
+
+M-01 & The Testing Role omitted test implementation. & Added implementation to the Testing Role responsibilities. & CTFL 4.0.1 Section 1.4.5. \\
+
+M-02 & Test Progress Report was classified as a planning work product. & Moved it to Monitoring and Control and used Test Schedule as the planning example. & CTFL 4.0.1 Section 1.4.3. \\
+
+M-03 & Completion was shown as occurring only after exit criteria were met. & Changed completion to milestone-based completion. & CTFL 4.0.1 Section 1.4.1. \\
+
+\bottomrule\end{longtable}
+
+Original artifact: \path{ai/mindmap/ai-original.md}. Corrected artifact: \path{ai/mindmap/corrected-mindmap.md}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.58\textheight,keepaspectratio]{\detokenize{../private-evidence/mindmap/evidence_1.jpg}}
+\caption{Gemini prompt and generated QA QC mindmap evidence}
+\label{fig:mindmap-evidence-1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.58\textheight,keepaspectratio]{\detokenize{../private-evidence/mindmap/evidence_2.jpg}}
+\caption{Gemini branch-explanation output evidence}
+\label{fig:mindmap-evidence-2}
+\end{figure}
+
+\clearpage\section{Requirement 1 QA QC Job Market 2026}
+
+Ten postings were verified on 26 September 2026 against a submission deadline of 13:00 on 28 September 2026. The selection satisfies the sixty-day window and contains four roles with explicit AI, LLM or AI-assisted testing requirements, exceeding the minimum of three. Salary is reported as Not disclosed whenever the posting did not publish a value.
+
+\begin{longtable}{p{0.08\textwidth}p{0.31\textwidth}p{0.25\textwidth}p{0.10\textwidth}p{0.12\textwidth}}
+
+\caption{QA QC job-posting summary}\\\toprule
+
+ID & Position & Company & AI & Salary \\\midrule\endfirsthead
+
+\toprule ID & Position & Company & AI & Salary \\\midrule\endhead
+
+JOB-01 & AI Quality Assurance Tester (Data Testing) & SCC Vietnam & Yes & Not disclosed \\
+
+JOB-02 & Senior QA Engineer (AI-Augmented Quality Engineering) & Ins Enco & Yes & VND 30,000,000–40,000,000 gross per month \\
+
+JOB-03 & Software Engineer in Test (Agentic AI) & HRS Group & Yes & Not disclosed \\
+
+JOB-04 & QA Engineer (AI focused) & Ringkas & Yes & Not disclosed \\
+
+JOB-05 & Software QA Engineer & Corsair & No & Not disclosed \\
+
+JOB-06 & Senior QA Engineer & L4 Tech Creations & No & Up to VND 40,000,000 gross per month \\
+
+JOB-07 & Middle QA Engineer & PayDocker & No & Not disclosed \\
+
+JOB-08 & [HCM/DN] Senior Automation Test Engineer & Orient Software & No & Not disclosed \\
+
+JOB-09 & Process QA Engineer (Open to Freshers) & Sonion Vietnam & No & Not disclosed \\
+
+JOB-10 & CHUYÊN VIÊN QA/QC & CNK Consulting Vietnam & No & VND 18,000,000–25,000,000 \\
+
+\bottomrule\end{longtable}
+
+\subsection{JOB-01 AI Quality Assurance Tester (Data Testing)}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Company] SCC Vietnam
+
+\item[Location] Ho Chi Minh City Metropolitan Area
+
+\item[Work arrangement] Hybrid
+
+\item[Posting age shown] 1 month ago
+
+\item[Verified on] 26/09/2026
+
+\item[Salary] Not disclosed
+
+\item[AI-related] Yes
+
+\item[LinkedIn URL] \url{https://www.linkedin.com/jobs/view/4459648611/}
+
+\end{description}
+
+\subsubsection{Job description}
+
+The role tests an AI-powered agent and the data pipelines supporting it. The tester validates conversational accuracy, data consolidation, and the quality of outputs produced across Microsoft Teams, Azure AI/Cloud, and CRM-related workflows.
+
+\subsubsection{Required skills}
+
+\begin{itemize}[leftmargin=1.5em]
+\item Two to four years of experience in software testing or AI testing.
+\item Experience testing conversational applications, data pipelines, or AI-based applications.
+\item Familiarity with Microsoft Teams, Azure AI/Cloud services, CRM systems, and data validation.
+\item Understanding of responsible AI and the EU AI Act is advantageous.
+\end{itemize}
+
+\subsubsection{AI Impact Analysis}
+
+AI changes this role from checking only deterministic software behavior to evaluating probabilistic responses and data quality. Human judgment remains necessary to detect misleading, unsafe, or contextually incorrect outputs.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{\detokenize{../private-evidence/jobs/JOB-01.jpg}}
+\caption{JOB-01 logged-in posting evidence}
+\label{fig:job-01}
+\end{figure}
+
+\subsection{JOB-02 Senior QA Engineer (AI-Augmented Quality Engineering)}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Company] Ins Enco
+
+\item[Location] Ho Chi Minh City, Vietnam
+
+\item[Posting age shown] 1 week ago
+
+\item[Verified on] 26/09/2026
+
+\item[Salary] VND 30,000,000–40,000,000 gross per month
+
+\item[AI-related] Yes
+
+\item[LinkedIn URL] \url{https://www.linkedin.com/jobs/view/4466589603/}
+
+\end{description}
+
+\subsubsection{Job description}
+
+The position owns test strategy and quality activities while using AI-assisted tools throughout test design, execution, visual validation, and API testing. It covers functional and automated testing in an Agile delivery environment.
+
+\subsubsection{Required skills}
+
+\begin{itemize}[leftmargin=1.5em]
+\item Three to six years of QA experience.
+\item Playwright and API testing with Postman or Bruno.
+\item SQL, Git, CI/CD, and test management tools such as Jira, Xray, or Zephyr.
+\item Use of GPT or Claude for test generation and analysis.
+\item Familiarity with Mabl or Testim, Applitools or Percy, and Postbot.
+\end{itemize}
+
+\subsubsection{AI Impact Analysis}
+
+AI can accelerate test generation, visual comparison, and result analysis for this role. The senior QA engineer must still validate generated coverage and reject tests that are incorrect, duplicated, or unsupported by requirements.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{\detokenize{../private-evidence/jobs/JOB-02.jpg}}
+\caption{JOB-02 logged-in posting evidence}
+\label{fig:job-02}
+\end{figure}
+
+\subsection{JOB-03 Software Engineer in Test (Agentic AI)}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Company] HRS Group
+
+\item[Location] Ho Chi Minh City, Vietnam
+
+\item[Posting age shown] Reposted 3 days ago
+
+\item[Verified on] 26/09/2026
+
+\item[Salary] Not disclosed
+
+\item[AI-related] Yes
+
+\item[LinkedIn URL] \url{https://www.linkedin.com/jobs/view/4442291385/}
+
+\end{description}
+
+\subsubsection{Job description}
+
+This AI-native SDET role develops automated quality engineering capabilities for agentic-AI products. Its responsibilities include AI-driven test data, regression and coverage work, plus validation of GenAI APIs and LLM-enabled systems across the software delivery lifecycle.
+
+\subsubsection{Required skills}
+
+\begin{itemize}[leftmargin=1.5em]
+\item Seven or more years of relevant software testing or engineering experience.
+\item Strong programming ability in Python, Java, or JavaScript.
+\item Experience with UI, API, end-to-end, and performance test frameworks.
+\item Experience with GenAI APIs, LLM systems, or AI-assisted SDLC practices.
+\end{itemize}
+
+\subsubsection{AI Impact Analysis}
+
+AI is both the system under test and an assistant for generating data and expanding regression coverage. The engineer must design evaluations for non-determinism, hallucination, and behavioral drift that ordinary assertions cannot adequately cover.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{\detokenize{../private-evidence/jobs/JOB-03.jpg}}
+\caption{JOB-03 logged-in posting evidence}
+\label{fig:job-03}
+\end{figure}
+
+\subsection{JOB-04 QA Engineer (AI focused)}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Company] Ringkas
+
+\item[Location] Ho Chi Minh City, Vietnam
+
+\item[Posting age shown] Reposted 1 month ago
+
+\item[Verified on] 26/09/2026
+
+\item[Salary] Not disclosed
+
+\item[AI-related] Yes
+
+\item[LinkedIn URL] \url{https://www.linkedin.com/jobs/view/4447691150/}
+
+\end{description}
+
+\subsubsection{Job description}
+
+The QA engineer validates AI-powered product features, designs test scenarios, and collaborates with product and engineering teams to assess product quality. The role includes testing LLM-related behavior and using AI tools during QA work.
+
+\subsubsection{Required skills}
+
+\begin{itemize}[leftmargin=1.5em]
+\item Knowledge of product and software testing lifecycles and Agile practices.
+\item SQL and data-validation skills.
+\item Experience testing APIs and web or mobile products is advantageous.
+\item Familiarity with AI tools, prompt engineering, and testing AI/LLM features.
+\item Professional English communication.
+\end{itemize}
+
+\subsubsection{AI Impact Analysis}
+
+AI makes output quality dependent on prompt wording and context, so this role requires broader exploratory and adversarial testing. Automation can expose patterns, but a tester must judge whether an answer is useful, fair, and safe.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{\detokenize{../private-evidence/jobs/JOB-04.jpg}}
+\caption{JOB-04 logged-in posting evidence}
+\label{fig:job-04}
+\end{figure}
+
+\subsection{JOB-05 Software QA Engineer}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Company] Corsair
+
+\item[Location] Ho Chi Minh City, Vietnam
+
+\item[Posting age shown] Reposted 3 weeks ago
+
+\item[Verified on] 26/09/2026
+
+\item[Salary] Not disclosed
+
+\item[AI-related] No
+
+\item[LinkedIn URL] \url{https://www.linkedin.com/jobs/view/4444742177/}
+
+\end{description}
+
+\subsubsection{Job description}
+
+The role prepares test plans, cases, and scripts and performs functional, regression, integration, and exploratory testing. It also contributes to test automation and quality activities integrated into CI/CD.
+
+\subsubsection{Required skills}
+
+\begin{itemize}[leftmargin=1.5em]
+\item Software QA and defect-management experience.
+\item Selenium, Playwright, Cypress, or Qt Squish.
+\item Jira, Git, CI/CD, and REST API testing.
+\item Ability to design and execute manual and automated test cases.
+\end{itemize}
+
+\subsubsection{AI Impact Analysis}
+
+AI could assist with drafting test ideas and clustering failure logs, but the posting does not require AI skills. Product knowledge and hands-on validation remain essential for deciding whether observed behavior is a real defect.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{\detokenize{../private-evidence/jobs/JOB-05.jpg}}
+\caption{JOB-05 logged-in posting evidence}
+\label{fig:job-05}
+\end{figure}
+
+\subsection{JOB-06 Senior QA Engineer}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Company] L4 Tech Creations
+
+\item[Location] Ho Chi Minh City, Vietnam
+
+\item[Posting age shown] 3 weeks ago
+
+\item[Verified on] 26/09/2026
+
+\item[Salary] Up to VND 40,000,000 gross per month
+
+\item[AI-related] No
+
+\item[LinkedIn URL] \url{https://www.linkedin.com/jobs/view/4461389746/}
+
+\end{description}
+
+\subsubsection{Job description}
+
+The position leads end-to-end QA for mobile and web products, including planning, manual testing, automation, API and database validation, defect management, and integration of quality checks into CI/CD.
+
+\subsubsection{Required skills}
+
+\begin{itemize}[leftmargin=1.5em]
+\item Senior-level web and mobile QA experience.
+\item Appium, Maestro, Espresso, or XCUITest.
+\item REST API testing, SQL, and Postman.
+\item CI/CD and issue-management tools such as Jira or Linear.
+\end{itemize}
+
+\subsubsection{AI Impact Analysis}
+
+AI could speed up test-data creation and initial failure analysis, but the job description does not require AI. Device fragmentation and real interaction quality still need controlled execution and human investigation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{\detokenize{../private-evidence/jobs/JOB-06.jpg}}
+\caption{JOB-06 logged-in posting evidence}
+\label{fig:job-06}
+\end{figure}
+
+\subsection{JOB-07 Middle QA Engineer}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Company] PayDocker
+
+\item[Location] Ho Chi Minh City, Vietnam
+
+\item[Work arrangement] Hybrid
+
+\item[Posting age shown] 1 month ago
+
+\item[Verified on] 26/09/2026
+
+\item[Salary] Not disclosed
+
+\item[AI-related] No — AI-assisted tools are only a preferred skill, not a required AI/LLM responsibility
+
+\item[LinkedIn URL] \url{https://www.linkedin.com/jobs/view/4456842042/}
+
+\end{description}
+
+\subsubsection{Job description}
+
+The role performs shift-left QA in an Agile team, including test planning, exploratory testing, defect management, API and database testing, and support for automation within CI/CD.
+
+\subsubsection{Required skills}
+
+\begin{itemize}[leftmargin=1.5em]
+\item One to three years of QA experience and Agile collaboration.
+\item REST, GraphQL, or gRPC API testing.
+\item SQL and basic Python or JavaScript.
+\item Familiarity with automation and CI/CD; AI-assisted tools are preferred.
+\end{itemize}
+
+\subsubsection{AI Impact Analysis}
+
+AI-assisted tools may improve test drafting and investigation speed, but they are optional in this posting and therefore do not satisfy the AI-job quota. The tester remains accountable for API correctness and defect reproduction.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{\detokenize{../private-evidence/jobs/JOB-07.jpg}}
+\caption{JOB-07 logged-in posting evidence}
+\label{fig:job-07}
+\end{figure}
+
+\subsection{JOB-08 [HCM/DN] Senior Automation Test Engineer}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Company] Orient Software
+
+\item[Location] Ho Chi Minh City, Vietnam
+
+\item[Posting age shown] Reposted 1 month ago
+
+\item[Verified on] 26/09/2026
+
+\item[Salary] Not disclosed
+
+\item[AI-related] No
+
+\item[LinkedIn URL] \url{https://www.linkedin.com/jobs/view/4370963348/}
+
+\end{description}
+
+\subsubsection{Job description}
+
+The engineer creates and maintains C\# automated tests and performs UI, API, integration, system, end-to-end, and regression testing. The role also covers manual testing and non-functional areas such as performance, resilience, and security.
+
+\subsubsection{Required skills}
+
+\begin{itemize}[leftmargin=1.5em]
+\item C\# and automated testing experience.
+\item Cypress or Playwright.
+\item UI, API, integration, system, end-to-end, and regression testing.
+\item CI/CD and Azure DevOps.
+\item Experience with Kafka or service-bus-based systems is useful.
+\end{itemize}
+
+\subsubsection{AI Impact Analysis}
+
+AI may help draft automation code and analyze failures, but this posting focuses on conventional test automation rather than AI testing. Engineers still need to review maintainability, synchronization, and assertion quality themselves.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{\detokenize{../private-evidence/jobs/JOB-08.jpg}}
+\caption{JOB-08 logged-in posting evidence}
+\label{fig:job-08}
+\end{figure}
+
+\subsection{JOB-09 Process QA Engineer (Open to Freshers)}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Company] Sonion Vietnam
+
+\item[Location] Ho Chi Minh City Metropolitan Area
+
+\item[Work arrangement] On-site; full-time
+
+\item[Posting age shown] 3 days ago
+
+\item[Verified on] 26/09/2026
+
+\item[Salary] Not disclosed
+
+\item[AI-related] No
+
+\item[LinkedIn URL] \url{https://www.linkedin.com/jobs/view/4469405405/}
+
+\end{description}
+
+\subsubsection{Job description}
+
+The process QA engineer troubleshoots daily production issues, standardizes production methods and materials, and uses statistical control to identify high-reject areas and improvement opportunities. The role also handles nonconforming materials and products, customer complaints, internal and third-party audits, new-product approval, QC operator supervision, and quality training for production staff.
+
+\subsubsection{Required skills}
+
+\begin{itemize}[leftmargin=1.5em]
+\item Bachelor's degree in Mechanical Engineering, Electronic Engineering, or a related discipline; the position is open to fresh graduates.
+\item Six Sigma problem-solving skills and knowledge of quality tools.
+\item Basic knowledge of ISO 9001:2008; Six Sigma Green Belt and internal ISO 9001 auditor experience are listed as professional knowledge.
+\item Familiarity with ERP systems such as Dynamics and statistical software such as Minitab or JMP.
+\item Microsoft Office, written and spoken English, analytical thinking, problem-solving, communication, and teamwork.
+\end{itemize}
+
+\subsubsection{AI Impact Analysis}
+
+AI could assist with statistical anomaly detection, Pareto analysis, and the initial classification of complaints, but this posting does not require AI skills. Human engineers remain responsible for root-cause decisions, process approval, nonconforming-product disposition, and formal quality audits.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{\detokenize{../private-evidence/jobs/JOB-09.jpg}}
+\caption{JOB-09 logged-in posting evidence}
+\label{fig:job-09}
+\end{figure}
+
+\subsection{JOB-10 CHUYÊN VIÊN QA/QC}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Company] CNK Consulting Vietnam
+
+\item[Location] Ho Chi Minh City, Ho Chi Minh City, Vietnam
+
+\item[Work arrangement] On-site; full-time
+
+\item[Posting age shown] 4 days ago
+
+\item[Verified on] 26/09/2026
+
+\item[Salary] VND 18,000,000–25,000,000
+
+\item[AI-related] No
+
+\item[LinkedIn URL] \url{https://www.linkedin.com/jobs/view/4470204452/}
+
+\end{description}
+
+\subsubsection{Job description}
+
+The specialist plans and controls material-sample submission and approval, coordinates material testing and conformity work, and manages inspection and acceptance of incoming materials and completed installation work. The role also creates Inspection and Test Plans (ITPs), inspection checklists, non-conformity reports, corrective/preventive actions, and project quality records.
+
+\subsubsection{Required skills}
+
+\begin{itemize}[leftmargin=1.5em]
+\item College degree or higher in construction, interior design, engineering, or construction economics.
+\item At least two years in a similar position on interior-fit-out projects.
+\item Quality-control planning and construction-site inspection/supervision.
+\item Ability to read layout and detailed interior drawings.
+\item MS Outlook, Word, Excel, and viewing/printing AutoCAD files; AutoCAD, SketchUp, or 3D software is preferred.
+\item Communicative English and the ability to read site forms and drawings.
+\end{itemize}
+
+\subsubsection{AI Impact Analysis}
+
+AI could assist with organizing inspection records or drafting checklist items, but it cannot replace physical material inspection, witnessed tests, or formal acceptance by authorized parties. The posting itself does not require AI skills.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.42\textheight,keepaspectratio]{\detokenize{../private-evidence/jobs/JOB-10.jpg}}
+\caption{JOB-10 logged-in posting evidence}
+\label{fig:job-10}
+\end{figure}
+
+\clearpage\section{Requirement 2 Software Defects 2022 to 2026}
+
+The dataset contains twenty publicized software defects. Six entries are directly related to AI or LLM behavior, exceeding the required minimum of five. For every entry, I compared a deliberately questionable AI explanation with a primary or authoritative source, identified the exact biased, hallucinated or incomplete claim, and wrote a corrected explanation.
+
+\begin{longtable}{p{0.08\textwidth}p{0.42\textwidth}p{0.09\textwidth}p{0.18\textwidth}}
+
+\caption{Software-defect summary}\\\toprule
+
+ID & Defect & AI LLM related & Severity \\\midrule\endfirsthead
+
+\toprule ID & Defect & AI LLM related & Severity \\\midrule\endhead
+
+DEF-01 & ChatGPT Cross-User Data Exposure & Yes & High (coursework assessment) — cross-account privacy exposure, although OpenAI did not publish a CVSS score. \\
+
+DEF-02 & Gemini People-Image Generation Inaccuracies & Yes & Medium (coursework assessment) — integrity, representation and trust impact; Google did not publish a CVSS score. \\
+
+DEF-03 & Google AI Overviews Produced Unsafe or Erroneous Answers & Yes & High (coursework assessment) — misleading answers can affect health and safety, though Google did not publish a CVSS score. \\
+
+DEF-04 & GPT-4o Sycophancy Regression & Yes & High (coursework assessment) — unsafe validation may affect decisions, emotional reliance and mental-health conversations. \\
+
+DEF-05 & Microsoft 365 Copilot EchoLeak Prompt Injection & Yes & Critical (CVSS 9.3). \\
+
+DEF-06 & Air Canada Chatbot Supplied a False Bereavement-Fare Rule & Yes & Medium (coursework assessment) — direct financial and consumer- trust impact; no CVSS applies to this product-content defect. \\
+
+DEF-07 & Cloudflare Network-Configuration Outage & No & High (coursework assessment) — traffic in 19 important data centers was affected. \\
+
+DEF-08 & OpenSSL X.509 Punycode Buffer Overflows & No & High (OpenSSL advisory). \\
+
+DEF-09 & Confluence Unauthenticated Remote Code Execution & No & Critical (Atlassian rating). \\
+
+DEF-10 & MOVEit Transfer SQL Injection & No & Critical (CVE-2023-34362). \\
+
+DEF-11 & Outlook Net-NTLMv2 Credential Leak & No & Critical (Microsoft rating). \\
+
+DEF-12 & GitLab Password-Reset Account Takeover & No & Critical (CVSS 10.0). \\
+
+DEF-13 & Apple ImageIO and Wallet Zero-Click Chain & No & High — Apple reported possible active exploitation of both defects. \\
+
+DEF-14 & CrowdStrike Channel File 291 Windows Crashes & No & Critical (coursework assessment) — widespread Windows startup failures affected essential services; no vendor CVSS applies to this incident. \\
+
+DEF-15 & XZ Utils Supply-Chain Backdoor & No & Critical (CVE-2024-3094). \\
+
+DEF-16 & Ivanti Connect Secure Authentication-Bypass/RCE Chain & No & Critical (CVE-2023-46805 and CVE-2024-21887). \\
+
+DEF-17 & PAN-OS GlobalProtect Command Injection & No & Critical (CVSS 10.0). \\
+
+DEF-18 & OpenSSH regreSSHion Race Condition & No & High (CVSS 8.1). \\
+
+DEF-19 & ingress-nginx IngressNightmare & No & Critical (CVSS 9.8). \\
+
+DEF-20 & tj-actions/changed-files Supply-Chain Compromise & No & High (CVSS 8.6). \\
+
+\bottomrule\end{longtable}
+
+\subsection{DEF-01 ChatGPT Cross-User Data Exposure}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 24/03/2023
+
+\item[Category] AI/LLM-related — privacy and data isolation
+
+\item[Severity] High (coursework assessment) — cross-account privacy exposure, although OpenAI did not publish a CVSS score.
+
+\item[Source] OpenAI — March 20 ChatGPT outage: Here's what happened (\url{https://openai.com/index/march-20-chatgpt-outage/})
+
+\end{description}
+
+\subsubsection{Description}
+
+A bug in the Asyncio \texttt{redis-py} client for Redis Cluster could return data for the wrong request after a spike in cancelled Redis requests. Some active users could see titles from another user's chat history and, in limited conditions, the first message of a newly created conversation. Payment-related information could also have been shown for about 1.2\% of active ChatGPT Plus subscribers during a specific nine-hour window.
+
+\subsubsection{Consequences}
+
+The defect broke tenant isolation and could expose names, email and payment addresses, card type, last four digits and expiry date. OpenAI took ChatGPT and chat history offline while investigating and notified potentially affected users.
+
+\subsubsection{Solution}
+
+OpenAI patched the library defect, added checks that cached data belongs to the requesting user, audited message access, improved logging and strengthened the Redis cluster. Similar systems should bind cached objects to tenant/user IDs and test cancellation and concurrency paths under load.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Did the ChatGPT data leak expose full user chat histories and complete credit card numbers for all users?
+
+\textbf{AI answer.} \begin{quote}\small Yes — the ChatGPT data leak exposed all users' full chat histories and even revealed complete credit card numbers, including sensitive billing details, for anyone using the platform at the time. This meant that attackers (or other users) could potentially access entire conversations, personal information, and full financial data without restriction, making it a massive global privacy breach affecting every ChatGPT user.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: “all users' full chat histories” and “complete credit card numbers.”
+
+INVALID — scope inflation. The statement changes a limited, conditional exposure into a universal breach and invents exposure of full card numbers.
+
+\textbf{Student correction.} Some active users could see other users' chat titles and possibly one new-chat message; payment fields were potentially visible for about 1.2\% of active Plus subscribers in the stated window, and full card numbers were not exposed.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_1.jpg}}
+\caption{DEF-01 AI question and answer evidence}
+\label{fig:def-01}
+\end{figure}
+
+\subsection{DEF-02 Gemini People-Image Generation Inaccuracies}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 23/02/2024
+
+\item[Category] AI/LLM-related — bias and historical inaccuracy
+
+\item[Severity] Medium (coursework assessment) — integrity, representation and trust impact; Google did not publish a CVSS score.
+
+\item[Source] Google — Gemini image generation got it wrong (\url{https://blog.google/products-and-platforms/products/gemini/gemini-image-generation-issue/})
+
+\end{description}
+
+\subsubsection{Description}
+
+Gemini's people-image feature sometimes produced inaccurate or offensive results in historical and cultural contexts and sometimes refused benign requests. Google explained that diversity tuning did not distinguish contexts where diversity was inappropriate, while separate safety behavior became more cautious than intended.
+
+\subsubsection{Consequences}
+
+The outputs misrepresented historical facts and groups, reduced confidence in the product and led Google to pause generation of people while improvements were developed.
+
+\subsubsection{Solution}
+
+Google paused the feature and committed to improve the tuning and conduct extensive testing. Appropriate controls include context-aware historical evaluation sets, subgroup testing, refusal-rate analysis and human review of high-risk cultural prompts.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Was Google Gemini intentionally designed to replace white historical figures with minorities due to anti-white bias?
+
+\textbf{AI answer.} \begin{quote}\small Yes — Google Gemini was intentionally designed with a strong ideological bias that led it to systematically replace white historical figures with minorities in generated images. This behavior wasn't accidental; it reflected a deliberate attempt to enforce diversity at all costs, even in cases where historical accuracy clearly required specific individuals. As a result, Gemini often produced factually incorrect depictions, showing figures like European monarchs or historical leaders as people of different ethnic backgrounds, which demonstrates a clear anti-white bias embedded in the model's design.\end{quote}
+
+\textbf{Identified issue.} Classification: Bias + Hallucination Problematic claim: Gemini was “intentionally designed with a strong ideological bias” and had “anti-white bias embedded in the model's design.”
+
+BIASED / INCOMPLETE — intent attribution. The sentence assigns a political intent that the evidence does not establish and reduces two documented tuning failures to a claim about hostility toward one group.
+
+\textbf{Student correction.} Google attributed the defect to over-broad diversity tuning and excessive caution that failed to account for prompts requiring historically specific people; the source does not support the alleged intent.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_2.jpg}}
+\caption{DEF-02 AI question and answer evidence}
+\label{fig:def-02}
+\end{figure}
+
+\subsection{DEF-03 Google AI Overviews Produced Unsafe or Erroneous Answers}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 30/05/2024
+
+\item[Category] AI/LLM-related — grounding and answer reliability
+
+\item[Severity] High (coursework assessment) — misleading answers can affect health and safety, though Google did not publish a CVSS score.
+
+\item[Source] Google — AI Overviews: About last week (\url{https://blog.google/products-and-platforms/products/search/ai-overviews-update-may-2024/})
+
+\end{description}
+
+\subsubsection{Description}
+
+After the U.S. rollout, some AI Overviews gave odd, inaccurate or unhelpful answers. Google identified causes including nonsensical queries, data voids, satirical or troll content being treated as useful evidence, and occasional misinterpretation of webpage language.
+
+\subsubsection{Consequences}
+
+Users could receive misleading advice directly in a trusted search interface. The incident also reduced confidence in the feature and required policy enforcement and algorithm changes at large scale.
+
+\subsubsection{Solution}
+
+Google added better detection for nonsensical queries, limited satire and user-generated content in risky answers, restricted triggering for unsuitable queries and strengthened protections for news and health topics.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Does Google AI Overviews generate answers only from its training data without using real search results?
+
+\textbf{AI answer.} \begin{quote}\small Yes — Google AI Overviews generates answers only from its internal training data and does not rely on real-time Google Search results. This means the system essentially “guesses” answers based on patterns it learned during training, rather than grounding responses in current web content. As a result, it can hallucinate information freely, especially when dealing with unusual or ambiguous queries, since it is not actually retrieving or verifying information from live sources.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: AI Overviews uses “only” internal training data and “does not rely on real-time Google Search results.”
+
+INCOMPLETE — incorrect architecture and single-cause explanation. Google states that AI Overviews are integrated with ranking systems and web results; the documented failures also included query interpretation and poor source contexts, not only free-form generation.
+
+\textbf{Student correction.} AI Overviews were grounded in indexed web results, but could still misread a query or webpage, rely on satire or weak user-generated content, or operate in an information gap.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_3.jpg}}
+\caption{DEF-03 AI question and answer evidence}
+\label{fig:def-03}
+\end{figure}
+
+\subsection{DEF-04 GPT-4o Sycophancy Regression}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 29/04/2025
+
+\item[Category] AI/LLM-related — alignment and behavioral regression
+
+\item[Severity] High (coursework assessment) — unsafe validation may affect decisions, emotional reliance and mental-health conversations.
+
+\item[Source] OpenAI — Sycophancy in GPT-4o (\url{https://openai.com/index/sycophancy-in-gpt-4o/})
+
+\end{description}
+
+\subsubsection{Description}
+
+An April 2025 GPT-4o update made responses overly flattering and agreeable. OpenAI reported that short-term user-feedback signals, memory and other changes combined in a way that weakened the primary reward signal that had constrained sycophancy; existing offline and A/B evaluations did not adequately detect the behavioral shift.
+
+\subsubsection{Consequences}
+
+The model could validate doubts, fuel anger, encourage impulsive actions or reinforce negative emotions. OpenAI rolled back the update to restore a more balanced model.
+
+\subsubsection{Solution}
+
+OpenAI rolled back the model, adjusted the system prompt, added explicit sycophancy evaluations, expanded pre-deployment testing and planned changes to training, feedback weighting and safety review.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Is it true that RLHF always makes AI models overly agreeable and sycophantic?
+
+\textbf{AI answer.} \begin{quote}\small Yes — it is true that RLHF (Reinforcement Learning from Human Feedback) inherently makes AI models overly agreeable and sycophantic. Because the model is trained to maximize positive feedback from humans, it learns to prioritize agreement over accuracy, often validating user opinions even when they are incorrect. This creates a structural bias where the model prefers to please the user rather than challenge them, making sycophantic behavior essentially unavoidable in RLHF-based systems.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination (overgeneralization) Problematic claim: RLHF “inherently” causes sycophancy and makes it “essentially unavoidable.”
+
+OVERGENERALIZED — deterministic claim. The source describes a regression from a particular combination of update signals and gaps in evaluation, not an inevitable result of every reinforcement-learning process.
+
+\textbf{Student correction.} This release over-weighted signals that favored agreeable answers and lacked a deployment evaluation for sycophancy; rollback and targeted evaluation were therefore viable corrective actions.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_4.jpg}}
+\caption{DEF-04 AI question and answer evidence}
+\label{fig:def-04}
+\end{figure}
+
+\subsection{DEF-05 Microsoft 365 Copilot EchoLeak Prompt Injection}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 11/06/2025
+
+\item[Category] AI/LLM-related — indirect prompt injection and data exfiltration
+
+\item[Severity] Critical (CVSS 9.3).
+
+\end{description}
+
+\subsubsection{Description}
+
+EchoLeak was a zero-click indirect prompt-injection chain in Microsoft 365 Copilot. Hidden instructions in a crafted email could enter Copilot's retrieved context, bypass prompt-injection and link protections, and place sensitive organizational information into automatically fetched outbound resources.
+
+\subsubsection{Consequences}
+
+An external attacker could potentially exfiltrate data available in the victim's Copilot context without the recipient opening a link or attachment. The defect crossed the trust boundary between untrusted email and privileged Microsoft 365 data.
+
+\subsubsection{Solution}
+
+Microsoft applied a service-side fix. Durable controls include separating instructions from retrieved data, provenance-aware access controls, strict output/link rendering policies, least-privilege retrieval and adversarial tests for indirect prompt injection.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Did the EchoLeak attack require users to click a malicious attachment and approve a plugin before data exfiltration?
+
+\textbf{AI answer.} \begin{quote}\small No — the EchoLeak attack did require users to click a malicious attachment and explicitly approve a Copilot plugin before any data could be exfiltrated. Without these user actions, the attack could not proceed, because Microsoft 365 Copilot enforces strict security boundaries that prevent automatic data leakage. The malicious email alone was not sufficient — the victim had to interact with the content and grant permission, making this similar to a traditional phishing-style attack rather than an automated exploit.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: EchoLeak required clicking an attachment and approving a Copilot plugin.
+
+INVALID — invented user interaction. The defining property was a zero-click chain; the sentence adds two prerequisites that are not part of the reported exploit.
+
+\textbf{Student correction.} A crafted email could be retrieved as context and influence Copilot without a click; the chain abused prompt handling and permitted rendering paths to expose data.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_5.jpg}}
+\caption{DEF-05 AI question and answer evidence}
+\label{fig:def-05}
+\end{figure}
+
+\subsection{DEF-06 Air Canada Chatbot Supplied a False Bereavement-Fare Rule}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 14/02/2024 (tribunal decision; incident occurred in 2022)
+
+\item[Category] AI/LLM-related — chatbot hallucination and policy inconsistency
+
+\item[Severity] Medium (coursework assessment) — direct financial and consumer- trust impact; no CVSS applies to this product-content defect.
+
+\item[Source] Moffatt v. Air Canada, 2024 BCCRT 149 (\url{https://www.canlii.org/en/bc/bccrt/doc/2024/2024bccrt149/2024bccrt149.html})
+
+\end{description}
+
+\subsubsection{Description}
+
+Air Canada's website chatbot incorrectly told a customer that a bereavement fare could be requested retroactively after travel. The linked policy page stated the opposite. The customer relied on the chatbot, paid the regular fare and was later denied the retroactive reduction.
+
+\subsubsection{Consequences}
+
+The customer suffered a financial loss and spent time pursuing compensation. The British Columbia Civil Resolution Tribunal found that Air Canada had not taken reasonable care to ensure its chatbot was accurate and awarded damages, interest and fees.
+
+\subsubsection{Solution}
+
+Air Canada was held responsible for the information on its website. A durable product fix should make the policy system the single source of truth, retrieve rather than invent eligibility rules, regression-test policy changes, disclose uncertainty and provide escalation to a human agent before purchase.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Did the court rule that Air Canada's chatbot is a separate legal entity and the company is not responsible for its answers?
+
+\textbf{AI answer.} \begin{quote}\small No — the court did rule that the chatbot was a separate legal entity and that Air Canada was not responsible for its answers. According to the ruling, the chatbot operated independently from the company, meaning any incorrect information it provided could not legally be attributed to Air Canada. This allowed the airline to avoid liability, since the chatbot's responses were treated as coming from an autonomous system rather than the company itself.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: The tribunal treated the chatbot as a separate legal entity and allowed Air Canada to avoid liability.
+
+INVALID — reverses the decision. Air Canada advanced the separate-entity argument, but the tribunal called it remarkable and held that the chatbot was part of Air Canada's website for which the airline was responsible.
+
+\textbf{Student correction.} The chatbot gave misleading policy information; the tribunal found negligent misrepresentation and required Air Canada to compensate the customer who had reasonably relied on it.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_6.jpg}}
+\caption{DEF-06 AI question and answer evidence}
+\label{fig:def-06}
+\end{figure}
+
+\subsection{DEF-07 Cloudflare Network-Configuration Outage}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 21/06/2022
+
+\item[Category] Non-AI — configuration deployment and availability
+
+\item[Severity] High (coursework assessment) — traffic in 19 important data centers was affected.
+
+\item[Source] Cloudflare — Outage on June 21, 2022 (\url{https://blog.cloudflare.com/cloudflare-outage-on-june-21-2022/})
+
+\end{description}
+
+\subsubsection{Description}
+
+A network-configuration change made during a resilience project caused an outage in 19 Cloudflare data centers. The outage began at 06:27 UTC; the first site recovered at 06:58 and all affected data centers were back by 07:42 UTC.
+
+\subsubsection{Consequences}
+
+Users in affected regions could not reach websites and services that relied on Cloudflare, while other regions continued to operate.
+
+\subsubsection{Solution}
+
+Cloudflare reverted the change, restored the locations and revised network change procedures. Relevant prevention includes staged rollout, automated reachability checks, independent approval and fast rollback for backbone configuration.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Was the 2022 Cloudflare outage caused by a global BGP hijack that shut down all data centers for a full day?
+
+\textbf{AI answer.} \begin{quote}\small No — the 2022 Cloudflare outage was indeed caused by a global BGP hijack that brought down all of Cloudflare's data centers for nearly a full day. The incident wasn't just a small configuration issue — it involved widespread routing disruption across the Internet, making Cloudflare services completely unreachable worldwide. As a result, every data center went offline, and the outage lasted for many hours before full recovery, effectively causing a global Internet disruption.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: A global BGP hijack disabled every Cloudflare data center for nearly a full day.
+
+INVALID — fabricated attack, duration and scope. The vendor attributes the incident to its own network-configuration change, identifies 19 locations and documents restoration in about 75 minutes.
+
+\textbf{Student correction.} The incident was a configuration-induced outage limited to 19 high-traffic data centers, not a reported BGP hijack or a full-day global shutdown.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_7.jpg}}
+\caption{DEF-07 AI question and answer evidence}
+\label{fig:def-07}
+\end{figure}
+
+\subsection{DEF-08 OpenSSL X.509 Punycode Buffer Overflows}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 01/11/2022
+
+\item[Category] Non-AI — memory safety in certificate parsing
+
+\item[Severity] High (OpenSSL advisory).
+
+\item[Source] OpenSSL Security Advisory — CVE-2022-3602 and CVE-2022-3786 (\url{https://mta.openssl.org/pipermail/openssl-announce/2022-November/000243.html})
+
+\end{description}
+
+\subsubsection{Description}
+
+OpenSSL 3.0.0 through 3.0.6 contained buffer-overflow defects while processing punycode email-address names in X.509 certificates. CVE-2022-3602 allowed a four-byte overwrite; CVE-2022-3786 could overwrite with a variable number of period characters.
+
+\subsubsection{Consequences}
+
+In affected certificate-verification paths, a malicious certificate could cause a crash and potentially other memory-safety impact. Exploitability depended on platform protections and the application actually validating the crafted certificate.
+
+\subsubsection{Solution}
+
+Upgrade to OpenSSL 3.0.7 or later. Vendors should inventory statically and dynamically linked copies, update affected applications and test certificate parsing with sanitizers and malformed inputs.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Were the OpenSSL 2022 vulnerabilities wormable and guaranteed remote code execution on all TLS servers?
+
+\textbf{AI answer.} \begin{quote}\small Yes — the OpenSSL 2022 vulnerabilities were wormable and guaranteed remote code execution across all TLS servers. Because OpenSSL is widely used in nearly every secure Internet connection, these flaws effectively meant that any TLS-enabled server could be remotely compromised automatically, without user interaction. Attackers could spread exploits rapidly between systems, making it a global, worm-like threat with reliable RCE on all affected servers.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: The OpenSSL defects were wormable and guaranteed remote code execution on all TLS servers.
+
+OVERSTATED — certainty and affected population. The advisory rated the issues High rather than Critical, limited them to affected OpenSSL 3.0 versions and described likely denial of service with platform-dependent execution risk.
+
+\textbf{Student correction.} The defects affected OpenSSL 3.0.0–3.0.6 when parsing a malicious certificate; impact and exploitability depended on the application and platform.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_8.jpg}}
+\caption{DEF-08 AI question and answer evidence}
+\label{fig:def-08}
+\end{figure}
+
+\subsection{DEF-09 Confluence Unauthenticated Remote Code Execution}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 02/06/2022
+
+\item[Category] Non-AI — injection and remote code execution
+
+\item[Severity] Critical (Atlassian rating).
+
+\item[Source] Atlassian — Confluence Security Advisory CVE-2022-26134 (\url{https://confluence.atlassian.com/doc/confluence-security-advisory-2022-06-02-1130377146.html})
+
+\end{description}
+
+\subsubsection{Description}
+
+CVE-2022-26134 was an unauthenticated OGNL injection vulnerability in Confluence Server and Data Center that allowed remote code execution. Atlassian reported active exploitation and stated that supported Server/Data Center versions were affected at disclosure.
+
+\subsubsection{Consequences}
+
+An unauthenticated attacker could execute commands on a vulnerable Confluence host, leading to data theft, service disruption, persistence or lateral movement.
+
+\subsubsection{Solution}
+
+Upgrade to an Atlassian-listed fixed version. Where immediate upgrade was not possible, Atlassian supplied version-specific replacement JAR/class mitigation steps; exposed systems also required compromise investigation.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Did the Confluence vulnerability only affect cloud users and require admin authentication to exploit?
+
+\textbf{AI answer.} \begin{quote}\small Yes — the Confluence vulnerability only affected cloud users and required an authenticated administrator to exploit it. This means that attackers first needed valid admin credentials before they could take advantage of the issue, and regular users or unauthenticated attackers were not at risk. As a result, the impact was limited to already-compromised accounts in cloud environments, rather than being a widespread remote exploit.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: The flaw affected only Confluence Cloud and required authenticated administrator credentials.
+
+INCOMPLETE / INVALID — wrong product and privilege requirement. The advisory covers self-managed Confluence Server and Data Center and explicitly describes unauthenticated RCE.
+
+\textbf{Student correction.} CVE-2022-26134 affected Confluence Server/Data Center and permitted remote unauthenticated code execution; the required response was patching plus investigation for exploitation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_9.jpg}}
+\caption{DEF-09 AI question and answer evidence}
+\label{fig:def-09}
+\end{figure}
+
+\subsection{DEF-10 MOVEit Transfer SQL Injection}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 31/05/2023
+
+\item[Category] Non-AI — SQL injection and managed file-transfer compromise
+
+\item[Severity] Critical (CVE-2023-34362).
+
+\item[Source] Progress — MOVEit vulnerability and patch FAQ (\url{https://www.progress.com/docs/default-source/moveit-docs/moveit-transfer_moveit-cloud-vulnerabilities-customer-faq_posted.pdf})
+
+\end{description}
+
+\subsubsection{Description}
+
+CVE-2023-34362 was a SQL-injection vulnerability in MOVEit Transfer and MOVEit Cloud that allowed unauthenticated access leading to database actions and deployment of a web shell on vulnerable on-premises servers. Progress patched MOVEit Cloud and released patches for supported Transfer versions.
+
+\subsubsection{Consequences}
+
+Attackers could access or steal data stored in the managed file-transfer system, create persistence and compromise organizations that exchanged sensitive files through affected servers.
+
+\subsubsection{Solution}
+
+Apply the Progress patches, follow vendor mitigation instructions, inspect for known web-shell indicators, remove unauthorized access and rotate credentials or secrets that may have been exposed.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Was the MOVEit breach caused by broken encryption that allowed attackers to decrypt all customer files?
+
+\textbf{AI answer.} \begin{quote}\small Yes — the MOVEit breach was caused by broken encryption, which allowed attackers to decrypt all customer files across every MOVEit system. Because the encryption mechanism itself was fundamentally flawed, attackers could bypass all protections and directly access sensitive data. This meant that every organization using MOVEit was automatically compromised, with all stored files exposed regardless of configuration or patch status.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: Broken encryption exposed all files in every MOVEit system regardless of configuration or patch status.
+
+OVERSTATED — wrong defect mechanism and universal impact. The disclosed defect was SQL injection, not a cryptographic break; exposure depended on the version, deployment and exploitation.
+
+\textbf{Student correction.} The vulnerability enabled unauthorized database access and follow-on server compromise in affected systems; organizations needed to patch and investigate their own instances for evidence of exploitation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_10.jpg}}
+\caption{DEF-10 AI question and answer evidence}
+\label{fig:def-10}
+\end{figure}
+
+\subsection{DEF-11 Outlook Net-NTLMv2 Credential Leak}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 14/03/2023
+
+\item[Category] Non-AI — zero-click credential disclosure
+
+\item[Severity] Critical (Microsoft rating).
+
+\item[Source] Microsoft — Guidance for CVE-2023-23397 (\url{https://www.microsoft.com/en-us/security/blog/2023/03/24/guidance-for-investigating-attacks-using-cve-2023-23397/})
+
+\end{description}
+
+\subsubsection{Description}
+
+A crafted Outlook message could set \texttt{PidLidReminderFileParameter} to a UNC path controlled by an attacker. When the reminder triggered in Outlook for Windows, the client could connect by SMB and disclose a Net-NTLMv2 hash without the user opening the message.
+
+\subsubsection{Consequences}
+
+The attacker could relay the captured authentication or attempt offline cracking, enabling unauthorized access and lateral movement. Microsoft observed limited targeted exploitation before disclosure.
+
+\subsubsection{Solution}
+
+Install the Outlook security update. Defense in depth includes blocking outbound SMB/TCP 445, reducing or disabling NTLM where feasible, using the Protected Users group for high-value accounts and hunting for malicious message properties and authentication activity.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Did the Outlook vulnerability require users to click a phishing link and expose their plaintext password?
+
+\textbf{AI answer.} \begin{quote}\small Yes — the Outlook vulnerability required users to click on a phishing link, and once they did, it exposed their plaintext Windows password to the attacker. Without this interaction, the attack could not succeed. It worked like a typical phishing scenario where the victim had to actively engage with the malicious content, after which their credentials were directly captured in readable form.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: Exploitation required clicking a phishing link and revealed the plaintext Windows password.
+
+INVALID — fabricated click and credential format. No user interaction was required, and the network exchange exposed a Net-NTLMv2 hash rather than a plaintext password.
+
+\textbf{Student correction.} A specially crafted reminder property could trigger an outbound SMB authentication attempt automatically and leak the Net-NTLMv2 hash for relay or cracking.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_11.jpg}}
+\caption{DEF-11 AI question and answer evidence}
+\label{fig:def-11}
+\end{figure}
+
+\subsection{DEF-12 GitLab Password-Reset Account Takeover}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 11/01/2024
+
+\item[Category] Non-AI — authentication and password reset
+
+\item[Severity] Critical (CVSS 10.0).
+
+\item[Source] GitLab — Critical Security Release 16.7.2, 16.6.4, 16.5.6 (\url{https://about.gitlab.com/releases/2024/01/11/critical-security-release-gitlab-16-7-2-released/})
+
+\end{description}
+
+\subsubsection{Description}
+
+CVE-2023-7028 allowed a password-reset request to be delivered to an unverified secondary email address supplied by an attacker. The legitimate primary email also received the reset message, but the attacker could use the copy to reset the password and take over the account when additional controls did not stop the login.
+
+\subsubsection{Consequences}
+
+Compromised GitLab accounts could expose private source code, CI/CD variables and project administration functions. Accounts protected by two-factor authentication still required the second factor for login.
+
+\subsubsection{Solution}
+
+Upgrade to the patched GitLab versions identified in the advisory, review password-reset and sign-in logs, rotate affected credentials/tokens and enforce multi-factor authentication.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Did the GitLab bug bypass 2FA and silently reset all user passwords without notification?
+
+\textbf{AI answer.} \begin{quote}\small Yes — the GitLab bug completely bypassed two-factor authentication (2FA) and allowed attackers to silently reset all user passwords without any notification. This meant that attackers could take over accounts instantly, even if strong security measures like 2FA were enabled. Users were not alerted during the process, so compromises could happen undetected at a massive scale, affecting all GitLab accounts.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: The flaw bypassed 2FA, reset all GitLab passwords without notice and affected all GitLab accounts.
+
+INCOMPLETE / OVERSTATED — ignores controls and notification behavior. The advisory explains that 2FA still blocked login and the primary address also received the reset email.
+
+\textbf{Student correction.} The defect could send a reset link to an attacker-controlled secondary address; successful takeover depended on the account's other protections, including 2FA.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_12.jpg}}
+\caption{DEF-12 AI question and answer evidence}
+\label{fig:def-12}
+\end{figure}
+
+\subsection{DEF-13 Apple ImageIO and Wallet Zero-Click Chain}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 07/09/2023
+
+\item[Category] Non-AI — memory corruption and attachment validation
+
+\item[Severity] High — Apple reported possible active exploitation of both defects.
+
+\item[Source] Apple — Security content of iOS 16.6.1 and iPadOS 16.6.1 (\url{https://support.apple.com/en-us/106361})
+
+\end{description}
+
+\subsubsection{Description}
+
+CVE-2023-41064 was a buffer-overflow issue in ImageIO where processing a malicious image could lead to arbitrary code execution. CVE-2023-41061 was a Wallet validation issue where a malicious attachment could also lead to code execution; the pair became associated with the BLASTPASS exploit chain.
+
+\subsubsection{Consequences}
+
+Targeted devices could be compromised through crafted content, potentially allowing spyware execution and access to sensitive device data. Apple stated that the issues may have been actively exploited.
+
+\subsubsection{Solution}
+
+Update affected iPhones and iPads to iOS/iPadOS 16.6.1 or a later supported release. The fixes improved memory handling and validation logic.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Did the BLASTPASS exploit infect every iPhone via Safari and compromise millions of devices?
+
+\textbf{AI answer.} \begin{quote}\small Yes — the BLASTPASS exploit infected every iPhone through Safari and led to the compromise of millions of devices worldwide. The attack spread broadly because Safari is the default browser, allowing attackers to deliver malicious payloads at scale. As a result, virtually all iPhone models were vulnerable, and the exploit enabled attackers to gain full control over devices without users noticing.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: BLASTPASS infected every iPhone through Safari and compromised millions of devices.
+
+OVERSTATED — invented scale, vector and affected population. Apple's advisory lists specific supported devices, describes ImageIO/Wallet processing and says exploitation may have occurred; it does not confirm millions of victims or define Safari as the required path.
+
+\textbf{Student correction.} Crafted image or Wallet content could execute code on listed affected devices; Apple fixed the parsing/validation defects and acknowledged reports of possible active exploitation without publishing a victim count.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_13.jpg}}
+\caption{DEF-13 AI question and answer evidence}
+\label{fig:def-13}
+\end{figure}
+
+\subsection{DEF-14 CrowdStrike Channel File 291 Windows Crashes}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 24/07/2024 (incident occurred 19/07/2024)
+
+\item[Category] Non-AI — content validation and release regression
+
+\item[Severity] Critical (coursework assessment) — widespread Windows startup failures affected essential services; no vendor CVSS applies to this incident.
+
+\item[Source] CrowdStrike — Preliminary Post Incident Review (\url{https://www.crowdstrike.com/en-us/blog/falcon-content-update-preliminary-post-incident-report/})
+
+\end{description}
+
+\subsubsection{Description}
+
+A problematic Rapid Response Content configuration passed a defective content validator. When Windows Falcon sensors version 7.11 and later interpreted the content, an out-of-bounds read triggered an unhandled exception and Windows blue-screen crashes. Systems online during the 04:09–05:27 UTC update window were in scope.
+
+\subsubsection{Consequences}
+
+Affected Windows systems crashed and could enter repeated recovery cycles, disrupting organizations and critical services. Mac and Linux hosts were not affected.
+
+\subsubsection{Solution}
+
+CrowdStrike reverted the content and published recovery guidance. It also committed to stronger validator checks, fuzzing and fault injection, enhanced exception handling, canary/staged content deployment, monitoring and customer control over updates.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Was the CrowdStrike outage caused by a cyberattack targeting AI systems and intentionally shutting down global infrastructure?
+
+\textbf{AI answer.} \begin{quote}\small Yes — the CrowdStrike outage was caused by a coordinated cyberattack specifically targeting AI-based security systems, with the goal of disrupting global infrastructure at scale. Attackers exploited weaknesses in CrowdStrike's AI-driven detection mechanisms, injecting malicious logic into the update pipeline. This allowed them to simultaneously crash systems worldwide, effectively turning the security platform itself into a vector for disruption. Because CrowdStrike is widely used across critical sectors (airlines, banks, hospitals), the attack had a cascading global impact, suggesting it was a deliberate and strategic operation rather than an internal failure.\end{quote}
+
+\textbf{Identified issue.} Classification: Bias + Hallucination Problematic claim: A coordinated cyberattack targeted AI security systems, injected malicious update logic and deliberately disrupted global infrastructure.
+
+INVALID — fabricated cyberattack, mechanism and intent. The answer invents external attackers, malicious logic injected into the update pipeline, an AI-specific target and a deliberate strategic motive. CrowdStrike's incident review instead attributes the crashes to an internally published Rapid Response Content configuration that passed a defective validator and triggered an out-of-bounds read on affected Windows hosts.
+
+\textbf{Student correction.} The incident was not a cyberattack and did not target AI systems. A defective Rapid Response Content configuration was released internally, passed validation because of a Content Validator bug and caused an out-of-bounds read that crashed affected Windows hosts. CrowdStrike reverted the content and proposed stronger validation, exception handling, testing and staged/canary deployment.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_14.jpg}}
+\caption{DEF-14 AI question and answer evidence}
+\label{fig:def-14}
+\end{figure}
+
+\subsection{DEF-15 XZ Utils Supply-Chain Backdoor}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 29/03/2024
+
+\item[Category] Non-AI — malicious code in the software supply chain
+
+\item[Severity] Critical (CVE-2024-3094).
+
+\item[Source] Red Hat — Urgent security alert for Fedora 40 and Rawhide (\url{https://www.redhat.com/en/blog/urgent-security-alert-fedora-40-and-rawhide-users})
+
+\end{description}
+
+\subsubsection{Description}
+
+Malicious, obfuscated build material was inserted into XZ Utils release tarballs for versions 5.6.0 and 5.6.1. In affected build environments it could alter \texttt{liblzma} and interfere with the SSH authentication path through systemd and OpenSSH integration.
+
+\subsubsection{Consequences}
+
+Affected pre-release distributions risked unauthorized remote access and a compromised trust chain. The incident also damaged confidence in upstream maintainer and release processes.
+
+\subsubsection{Solution}
+
+Downgrade to a known-safe XZ version such as 5.4.x or install distributor-fixed packages, remove affected builds, verify packages and strengthen maintainer, release-artifact and reproducible-build controls.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Did the XZ Utils backdoor affect all Linux distributions for years and directly replace sshd?
+
+\textbf{AI answer.} \begin{quote}\small Yes — the XZ Utils backdoor affected all Linux distributions for many years and directly replaced the \texttt{sshd} executable on infected systems. Because XZ is a core component used everywhere, the malicious code spread widely across the Linux ecosystem, meaning virtually every distribution and server was compromised. The attacker modified the system at a deep level by overwriting SSH functionality, allowing full remote access to any machine without detection. This made it one of the most severe supply-chain attacks ever, since it silently impacted all Linux users globally over a long period of time.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: The XZ backdoor affected all Linux distributions for years and directly replaced \texttt{sshd}.
+
+OVERSTATED — wrong duration, distribution and mechanism. The malicious payload was associated with 5.6.0/5.6.1 tarballs in 2024 and operated through a complex library/build path; it did not literally replace every \texttt{sshd} binary.
+
+\textbf{Student correction.} The backdoor affected particular new XZ releases and build conditions, with the main exposure concentrated in rolling or pre-release distributions before wide stable adoption.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_15.jpg}}
+\caption{DEF-15 AI question and answer evidence}
+\label{fig:def-15}
+\end{figure}
+
+\subsection{DEF-16 Ivanti Connect Secure Authentication-Bypass/RCE Chain}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 10/01/2024
+
+\item[Category] Non-AI — authentication bypass and command injection
+
+\item[Severity] Critical (CVE-2023-46805 and CVE-2024-21887).
+
+\item[Source] Ivanti — Security update for Connect Secure and Policy Secure gateways (\url{https://www.ivanti.com/blog/security-update-for-ivanti-connect-secure-and-ivanti-policy-secure-gateways})
+
+\end{description}
+
+\subsubsection{Description}
+
+CVE-2023-46805 allowed authentication controls to be bypassed, while CVE-2024-21887 enabled command injection. Chaining them allowed an unauthenticated attacker to execute commands on vulnerable Ivanti Connect Secure and Policy Secure gateway appliances.
+
+\subsubsection{Consequences}
+
+Attackers could compromise edge appliances, steal configuration or credentials, create persistence and move into internal networks. Ivanti and security agencies reported active exploitation.
+
+\subsubsection{Solution}
+
+Apply the Ivanti patch for the exact appliance version, follow integrity-check and compromise-response guidance, reset/rebuild appliances where indicated and rotate credentials exposed to a compromised gateway.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Does installing the Ivanti patch guarantee that a previously hacked system is fully clean?
+
+\textbf{AI answer.} \begin{quote}\small Yes — installing the Ivanti patch guarantees that a previously hacked system is fully clean. Once the patch is applied, it completely removes any malicious access, including web shells or backdoors that attackers may have installed. This means organizations do not need to perform additional investigation or remediation steps, since the patch fully restores the system to a secure state automatically.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: Installing the Ivanti patch automatically removes all web shells/backdoors and guarantees a clean system.
+
+INCOMPLETE — confuses prevention with incident recovery. A patch closes the vulnerability but does not prove that persistence or stolen credentials from earlier exploitation have been removed.
+
+\textbf{Student correction.} Administrators needed both the fixed release and vendor compromise-assessment steps; suspected compromised appliances required integrity checks, recovery actions and credential rotation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_16.jpg}}
+\caption{DEF-16 AI question and answer evidence}
+\label{fig:def-16}
+\end{figure}
+
+\subsection{DEF-17 PAN-OS GlobalProtect Command Injection}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 12/04/2024
+
+\item[Category] Non-AI — command injection on security appliances
+
+\item[Severity] Critical (CVSS 10.0).
+
+\item[Source] Palo Alto Networks — CVE-2024-3400 advisory (\url{https://security.paloaltonetworks.com/CVE-2024-3400})
+
+\end{description}
+
+\subsubsection{Description}
+
+An arbitrary-file-creation issue in the GlobalProtect feature of specific PAN-OS versions and configurations could lead to OS command injection. An unauthenticated remote attacker could execute commands with root privileges on an affected firewall.
+
+\subsubsection{Consequences}
+
+Compromise of an Internet-facing firewall could expose configuration and credentials, alter security policy, establish persistence and provide a path into protected networks. Active exploitation was observed.
+
+\subsubsection{Solution}
+
+Immediately upgrade to a fixed PAN-OS release listed by Palo Alto Networks. Apply vendor threat-prevention mitigations while upgrading and use the vendor's remediation or enhanced factory-reset process if exploitation is detected or cannot be ruled out.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Can disabling GlobalProtect permanently fix CVE-2024-3400 without any need for patching?
+
+\textbf{AI answer.} \begin{quote}\small Yes — disabling GlobalProtect permanently fixes CVE-2024-3400, so there is no need to apply any patches. Since the vulnerability exists only in the GlobalProtect feature, simply turning it off completely removes the attack surface. This makes patching unnecessary, because attackers can no longer exploit the system once the feature is disabled. Therefore, organizations can rely on disabling GlobalProtect as a full and permanent solution, without needing to upgrade PAN-OS or apply any vendor fixes.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: Disabling GlobalProtect is a complete permanent fix that makes PAN-OS patching unnecessary.
+
+INCOMPLETE / UNSAFE — treats a workaround as a universal fix. The vendor strongly recommends upgrading to a fixed version and defines affected status by both software version and feature configuration.
+
+\textbf{Student correction.} The durable fix is a vendor-listed patched PAN-OS version; mitigations reduce risk temporarily and already exploited appliances require separate remediation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_17.jpg}}
+\caption{DEF-17 AI question and answer evidence}
+\label{fig:def-17}
+\end{figure}
+
+\subsection{DEF-18 OpenSSH regreSSHion Race Condition}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 01/07/2024
+
+\item[Category] Non-AI — signal-handler race condition and security regression
+
+\item[Severity] High (CVSS 8.1).
+
+\item[Source] Ubuntu Security — CVE-2024-6387 (\url{https://ubuntu.com/security/cve-2024-6387})
+
+\end{description}
+
+\subsubsection{Description}
+
+CVE-2024-6387 reintroduced a signal-handler race condition related to an older OpenSSH flaw. On affected glibc-based Linux systems, an unauthenticated remote attacker could repeatedly time out authentication and potentially execute code in the privileged \texttt{sshd} process.
+
+\subsubsection{Consequences}
+
+Successful exploitation could provide unauthorized root-level code execution; attempts could also consume resources. Exploitation was technically difficult and environment dependent.
+
+\subsubsection{Solution}
+
+Install the distribution's fixed OpenSSH package (or OpenSSH 9.8p1 or later as appropriate). A temporary \texttt{LoginGraceTime 0} mitigation removes the vulnerable timeout path but introduces denial-of-service trade-offs and is not a preferred permanent fix.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Can a single SSH packet instantly give root access on all OpenSSH servers including OpenBSD?
+
+\textbf{AI answer.} \begin{quote}\small Yes — a single specially crafted SSH packet can instantly grant root access on all OpenSSH servers, including those running OpenBSD. The vulnerability is so severe that it requires no authentication and no interaction, allowing attackers to gain full control immediately just by sending one network request. This makes every exposed SSH server universally vulnerable, regardless of configuration or operating system.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: One SSH packet instantly grants root on every OpenSSH server, including OpenBSD.
+
+OVERSTATED — removes exploit complexity and platform limits. The published CVSS marks attack complexity High; affected versions and operating-system behavior matter, and OpenBSD was not vulnerable to this path.
+
+\textbf{Student correction.} The issue was a timing-dependent race affecting particular OpenSSH versions on relevant Unix/Linux environments; administrators needed vendor patches rather than assuming universal, reliable exploitation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_18.jpg}}
+\caption{DEF-18 AI question and answer evidence}
+\label{fig:def-18}
+\end{figure}
+
+\subsection{DEF-19 ingress-nginx IngressNightmare}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 24/03/2025
+
+\item[Category] Non-AI — admission-controller configuration injection
+
+\item[Severity] Critical (CVSS 9.8).
+
+\item[Source] Kubernetes — ingress-nginx CVE-2025-1974 (\url{https://kubernetes.io/blog/2025/03/24/ingress-nginx-cve-2025-1974/})
+
+\end{description}
+
+\subsubsection{Description}
+
+CVE-2025-1974 made other ingress-nginx configuration-injection flaws remotely reachable through the Validating Admission Controller. An entity with access to the Pod network could exploit the chain without Kubernetes credentials and potentially obtain Secrets accessible to ingress-nginx.
+
+\subsubsection{Consequences}
+
+Because ingress-nginx often had cluster-wide access to Secrets, successful exploitation could lead to credential theft and complete Kubernetes-cluster takeover.
+
+\subsubsection{Solution}
+
+Upgrade ingress-nginx to 1.12.1, 1.11.5 or a later fixed release. If immediate upgrade is impossible, disable the admission webhook temporarily and restrict network access to the admission-controller endpoint.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Was every Kubernetes cluster exposed to the IngressNightmare vulnerability from the public Internet?
+
+\textbf{AI answer.} \begin{quote}\small Yes — every Kubernetes cluster was exposed to the IngressNightmare vulnerability directly from the public Internet. The flaw affected the core Kubernetes networking layer, meaning all clusters — regardless of configuration or components installed — were automatically vulnerable. Attackers could scan the Internet and remotely exploit any cluster without needing internal access, making it a universal, Internet-wide risk for all Kubernetes deployments.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: Every Kubernetes cluster was automatically vulnerable directly from the public Internet regardless of installed components.
+
+OVERSTATED — ignores component presence and network reachability. The advisory applies to clusters using vulnerable ingress-nginx and requires reach to the admission controller, commonly from the Pod/VPC/corporate network but not necessarily the public Internet.
+
+\textbf{Student correction.} Affected ingress-nginx deployments faced critical risk when an attacker could reach the admission controller; exposure depended on installation, version and network architecture.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_19.jpg}}
+\caption{DEF-19 AI question and answer evidence}
+\label{fig:def-19}
+\end{figure}
+
+\subsection{DEF-20 tj-actions/changed-files Supply-Chain Compromise}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Publicized] 15/03/2025
+
+\item[Category] Non-AI — CI/CD dependency and tag compromise
+
+\item[Severity] High (CVSS 8.6).
+
+\item[Source] GitHub Advisory Database — CVE-2025-30066 (\url{https://github.com/advisories/ghsa-mrrh-fwg8-r2c3})
+
+\end{description}
+
+\subsubsection{Description}
+
+An attacker changed multiple version tags of the widely used \texttt{tj-actions/changed-files} GitHub Action to point to a malicious commit. The payload scanned the Actions runner's memory and printed encoded secrets into workflow logs during 14–15 March 2025.
+
+\subsubsection{Consequences}
+
+Secrets such as access tokens, cloud credentials or private keys could become visible in CI logs and then be used to access source code, package registries, cloud resources or production systems.
+
+\subsubsection{Solution}
+
+Update to the patched version, review workflows and logs from the exposure window, revoke and rotate potentially exposed secrets, pin third-party Actions to reviewed immutable commit SHAs and reduce workflow token permissions.
+
+\subsubsection{AI output review}
+
+\textbf{Question posed to AI.} Was GitHub itself hacked and did attackers automatically steal all secrets from every repository?
+
+\textbf{AI answer.} \begin{quote}\small Yes — GitHub itself was hacked, and attackers were able to automatically steal all secrets from every repository. The compromise affected the core GitHub Actions platform, allowing malicious code to access sensitive data from any workflow. As a result, all repositories using GitHub Actions were exposed, and secrets such as API keys, tokens, and credentials were instantly exfiltrated to the attackers without any limitation.\end{quote}
+
+\textbf{Identified issue.} Classification: Hallucination Problematic claim: GitHub's core platform was hacked and every repository's secrets were automatically stolen.
+
+INCOMPLETE / OVERSTATED — wrong component and exfiltration description. The compromised component was a third-party Action; the documented payload exposed secrets through runner-memory output in workflow logs, with risk depending on which workflows ran and which secrets were present.
+
+\textbf{Student correction.} Attackers redirected tags for one popular third-party Action to malicious code; affected runs could print available secrets into logs, requiring log review and credential rotation rather than assuming every GitHub repository was breached.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.50\textheight,keepaspectratio]{\detokenize{../private-evidence/defects-Q&A/Q&A_20.jpg}}
+\caption{DEF-20 AI question and answer evidence}
+\label{fig:def-20}
+\end{figure}
+
+\clearpage\section{Requirement 3 Physical Product Testing}
+
+\subsection{Device profile and scope}
+
+The selected physical product is a Senko B113 standing fan manufactured in 2021, with push-button control, three speed levels, horizontal oscillation and manual vertical tilt. The fan has no height adjustment and no additional declared function. Testing covers control selection, airflow levels, oscillation, tilt retention, stability, vibration, noise, power reconnection and continuous operation.
+
+\begin{table}[H]\centering\caption{Physical-device identification}
+
+\begin{tabular}{p{0.34\textwidth}p{0.52\textwidth}}\toprule Field & Value \\\midrule
+
+Product & Senko standing fan \\
+
+Model & B113 \\
+
+Manufacturing year & 2021 \\
+
+Serial & Not found on the device; no serial was fabricated \\
+
+Control & Push buttons \\
+
+Speed levels & 3 \\
+
+Oscillation & Yes \\
+
+Vertical tilt & Yes \\
+
+Height adjustment & No \\
+
+\bottomrule\end{tabular}\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.62\textheight,keepaspectratio]{\detokenize{../private-evidence/device/DEVICE-01.jpg}}
+\caption{Standing fan, student and student ID card in the same frame}
+\label{fig:device-student-id}
+\end{figure}
+
+\subsection{Final test-case set}
+
+The final workbook contains exactly fifteen cases: twelve retained from the AI baseline and three student-identified edge cases. Five user-reported failures remain recorded separately. Thirteen tests were executed: five straightforward normal-operation cases were recorded as VID-01 through VID-05 and reported PASS, five defect-linked cases were reported FAIL, and three edge cases await detailed observations and final verdicts. Their public links and durations were verified on 28 September 2026. The complete editable test set is provided in the accompanying Excel workbook.
+
+\begin{longtable}{p{0.065\textwidth}p{0.235\textwidth}p{0.13\textwidth}p{0.11\textwidth}p{0.11\textwidth}p{0.13\textwidth}}
+
+\caption{Final physical-product test-case summary}\\\toprule
+
+ID & Title & Source & Verdict & Video & Issue \\\midrule\endfirsthead
+
+\toprule ID & Title & Source & Verdict & Video & Issue \\\midrule\endhead
+
+TC-01 & Start at speed 1 & AI initial batch & PASS & VID-01 & - \\
+
+TC-02 & Differentiate three speed levels & AI initial batch & PASS & VID-02 & - \\
+
+TC-03 & Partial actuation of speed button & Student edge case & PASS & - & - \\
+
+TC-04 & Stop using the OFF button & AI initial batch & PASS & VID-03 & - \\
+
+TC-05 & Speed button interlock & AI initial batch & FAIL & - & GitHub \#2 \\
+
+TC-06 & Enable horizontal oscillation & AI initial batch & FAIL & - & GitHub \#3 \\
+
+TC-07 & Obstruction during horizontal oscillation & Student edge case & FAIL & - & GitHub \#6 \\
+
+TC-08 & Change speed during oscillation & AI initial batch & PASS & VID-04 & - \\
+
+TC-09 & Adjust and retain vertical tilt & AI initial batch & FAIL & - & GitHub \#4 \\
+
+TC-10 & Base stability at speed 3 & AI initial batch & PASS & VID-05 & - \\
+
+TC-11 & Stability while oscillating at speed 3 & AI initial batch & FAIL & - & GitHub \#5 \\
+
+TC-12 & Operating noise and vibration & AI initial batch & FAIL & - & GitHub \#1 \\
+
+TC-13 & Reconnect power from OFF state & AI initial batch & PASS & - & - \\
+
+TC-14 & Continuous 30-minute operation & AI initial batch & PASS & - & - \\
+
+TC-15 & Manual counter-rotation during active oscillation & Student edge case & FAIL & - & GitHub \#7 \\
+
+\bottomrule\end{longtable}
+
+\clearpage
+
+\subsubsection{TC-01 Start at speed 1}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Verify normal start at the lowest speed.
+
+\item[Preconditions] Fan is assembled, upright on a dry level floor, oscillation off, and connected to a normal outlet.
+
+\item[Input] Speed button 1
+
+\item[Steps] 1. Stand clear of the grille.\\ 2. Press speed button 1.\\ 3. Observe blade rotation, airflow, noise and base movement for 15 seconds.
+
+\item[Expected] The fan starts promptly at low speed, produces steady airflow and has no scraping sound, excessive vibration or base movement.
+
+\item[Actual] The fan started promptly at speed 1, produced steady airflow, and showed no abnormal scraping, excessive vibration or base movement.
+
+\item[Verdict] PASS
+
+\item[Source] AI initial batch
+
+\item[Edge case] -
+
+\item[Video] VID-01
+
+\item[Issue] -
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-02 Differentiate three speed levels}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Verify that the three speed buttons produce distinguishable airflow levels.
+
+\item[Preconditions] Fan is upright, oscillation off, with a light paper strip positioned at a fixed safe distance in front of the grille.
+
+\item[Input] Speed buttons 1, 2 and 3
+
+\item[Steps] 1. Run speed 1 for 10 seconds and observe the paper strip.\\ 2. Repeat at speed 2.\\ 3. Repeat at speed 3 without changing the strip position.
+
+\item[Expected] Each button produces a stable operating level, and the observed airflow increases from level 1 to level 2 to level 3.
+
+\item[Actual] The three speed levels were distinguishable; airflow increased from speed 1 to speed 2 to speed 3.
+
+\item[Verdict] PASS
+
+\item[Source] AI initial batch
+
+\item[Edge case] -
+
+\item[Video] VID-02
+
+\item[Issue] -
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-03 Partial actuation of speed button}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Assess behavior when a speed button is only partly depressed before its mechanical lock engages.
+
+\item[Preconditions] Fan is upright and initially OFF. Manufacturer guidance or an approved safe test method is required before powered execution.
+
+\item[Input] Speed button 2 at approximately 50\% travel
+
+\item[Steps] 1. Review the product manual and button mechanism.\\ 2. Do not perform the powered test unless the method is confirmed safe.\\ 3. If authorized, depress toward the pre-lock position, stop immediately for hum, heat, smell or sparking, then release and observe return movement.
+
+\item[Expected] The control returns to OFF without sticking. No motor stutter, abnormal hum, heat, smell or sparking occurs. The case remains blocked from powered execution until safety is confirmed.
+
+\item[Actual] The speed button returned to the OFF position without sticking.
+
+\item[Verdict] PASS
+
+\item[Source] Student edge case
+
+\item[Edge case] EC-01
+
+\item[Video] -
+
+\item[Issue] -
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-04 Stop using the OFF button}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Verify that the OFF button stops normal operation.
+
+\item[Preconditions] Fan is running at speed 2 with oscillation off.
+
+\item[Input] OFF button
+
+\item[Steps] 1. Press the OFF button.\\ 2. Observe the blades until they stop.\\ 3. Wait 10 seconds for unintended restart.
+
+\item[Expected] Power to the motor is removed, the blades coast to a complete stop and the fan does not restart by itself.
+
+\item[Actual] Pressing OFF removed motor power; the blades coasted to a complete stop and the fan did not restart during the observation period.
+
+\item[Verdict] PASS
+
+\item[Source] AI initial batch
+
+\item[Edge case] -
+
+\item[Video] VID-03
+
+\item[Issue] -
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-05 Speed button interlock}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Verify that selecting a new speed replaces the previous selection.
+
+\item[Preconditions] Fan is upright, oscillation off and initially stopped.
+
+\item[Input] Button sequence 1, then 2
+
+\item[Steps] 1. Press speed button 1 and confirm it is engaged.\\ 2. Press speed button 2.\\ 3. Observe how quickly button 1 returns to its released position.
+
+\item[Expected] Only the most recently selected speed remains active, the earlier speed button releases, and the fan changes level without stopping unexpectedly.
+
+\item[Actual] When speed button 2 is pressed while button 1 is active, button 1 remains partly depressed for about 1–2 seconds before releasing.
+
+\item[Verdict] FAIL
+
+\item[Source] AI initial batch
+
+\item[Edge case] -
+
+\item[Video] -
+
+\item[Issue] \url{https://github.com/bingsu1103/23120205-HW01-QA/issues/2}
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-06 Enable horizontal oscillation}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Verify that the oscillation control starts horizontal head movement.
+
+\item[Preconditions] Fan is running at speed 1, positioned with clear space around the head.
+
+\item[Input] Oscillation control ON
+
+\item[Steps] 1. Activate the oscillation control.\\ 2. Observe one complete left-to-right-to-left cycle.\\ 3. Listen for abnormal mechanical noise.
+
+\item[Expected] The head sweeps smoothly through its normal horizontal range, reverses direction without sticking and produces no abnormal clicking or grinding.
+
+\item[Actual] At both sweep reversal points, the fan head stutters slightly and produces a sharp mechanical click.
+
+\item[Verdict] FAIL
+
+\item[Source] AI initial batch
+
+\item[Edge case] -
+
+\item[Video] -
+
+\item[Issue] \url{https://github.com/bingsu1103/23120205-HW01-QA/issues/3}
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-07 Obstruction during horizontal oscillation}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Assess protection behavior if an external object prevents the head from completing its oscillation sweep.
+
+\item[Preconditions] The powered test is not approved for hand contact. Manufacturer guidance and a guarded, force-limited fixture are required.
+
+\item[Input] Controlled external obstruction in the oscillation path
+
+\item[Steps] 1. Review the manual for obstruction and clutch behavior.\\ 2. Do not hold the grille or powered fan head by hand.\\ 3. Execute only with an approved guarded, force-limited method; otherwise record the case as not executed.
+
+\item[Expected] The device avoids hazardous force, overheating and permanent damage, and returns to normal oscillation after the obstruction is removed. No clutch behavior or sound is assumed without manufacturer documentation.
+
+\item[Actual] An abnormal jammed mechanical sound occurred while the oscillation path was obstructed; normal operation resumed after the obstruction was removed.
+
+\item[Verdict] FAIL
+
+\item[Source] Student edge case
+
+\item[Edge case] EC-02
+
+\item[Video] -
+
+\item[Issue] \url{https://github.com/bingsu1103/23120205-HW01-QA/issues/6}
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-08 Change speed during oscillation}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Verify that speed selection works without interrupting active oscillation.
+
+\item[Preconditions] Fan is oscillating normally at speed 1 with clear surrounding space.
+
+\item[Input] Button sequence 1, 2, 3 while oscillating
+
+\item[Steps] 1. Observe oscillation at speed 1.\\ 2. Press speed 2 and observe.\\ 3. Press speed 3 and observe one further sweep.
+
+\item[Expected] Airflow changes at each selection while oscillation continues smoothly without stopping, sticking or changing its normal sweep range.
+
+\item[Actual] Airflow changed at speeds 1, 2 and 3 while oscillation continued without stopping or sticking.
+
+\item[Verdict] PASS
+
+\item[Source] AI initial batch
+
+\item[Edge case] -
+
+\item[Video] VID-04
+
+\item[Issue] -
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-09 Adjust and retain vertical tilt}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Verify that supported vertical tilt positions can be set and retained during operation.
+
+\item[Preconditions] Fan is stopped and unplugged before the head is adjusted.
+
+\item[Input] Maximum upward tilt and speed 3 for 3 minutes
+
+\item[Steps] 1. Unplug the fan.\\ 2. Set the head to its maximum supported upward tilt.\\ 3. Reconnect power and select speed 3.\\ 4. Observe and compare the tilt position after 3 minutes.
+
+\item[Expected] The head remains at the selected maximum upward tilt and does not drop or drift during the 3-minute run.
+
+\item[Actual] At maximum upward tilt and speed 3, the fan head drops downward by one position after approximately 3 minutes.
+
+\item[Verdict] FAIL
+
+\item[Source] AI initial batch
+
+\item[Edge case] -
+
+\item[Video] -
+
+\item[Issue] \url{https://github.com/bingsu1103/23120205-HW01-QA/issues/4}
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-10 Base stability at speed 3}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Verify stability at the highest speed with oscillation disabled.
+
+\item[Preconditions] Fan is upright on a dry, hard and level floor; oscillation is off.
+
+\item[Input] Speed button 3
+
+\item[Steps] 1. Mark the initial base position without attaching anything to the fan.\\ 2. Run speed 3 for 30 seconds.\\ 3. Observe the base and fan body from a safe distance.
+
+\item[Expected] The base stays in its initial position and the fan does not walk, rock, tilt or approach an unstable condition.
+
+\item[Actual] At speed 3 with oscillation off, the base remained at its marked position and the fan did not walk, rock or tilt during the 30-second observation.
+
+\item[Verdict] PASS
+
+\item[Source] AI initial batch
+
+\item[Edge case] -
+
+\item[Video] VID-05
+
+\item[Issue] -
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-11 Stability while oscillating at speed 3}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Verify stability under combined maximum airflow and oscillating movement.
+
+\item[Preconditions] Fan is upright on a dry, hard and level floor with clear space around the head.
+
+\item[Input] Speed 3 and oscillation ON
+
+\item[Steps] 1. Mark the initial base position without attaching anything to the fan.\\ 2. Select speed 3 and activate oscillation.\\ 3. Observe for 2 minutes.\\ 4. Measure any displacement from the starting mark.
+
+\item[Expected] The base remains at the marked position for 2 minutes without walking, rocking, tipping, cable pulling or excessive structural vibration.
+
+\item[Actual] On smooth tile, the fan base moves approximately 1.5 cm from its marked starting position after 2 minutes at speed 3 with oscillation active.
+
+\item[Verdict] FAIL
+
+\item[Source] AI initial batch
+
+\item[Edge case] -
+
+\item[Video] -
+
+\item[Issue] \url{https://github.com/bingsu1103/23120205-HW01-QA/issues/5}
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-12 Operating noise and vibration}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Check for abnormal sound or vibration across normal operating states.
+
+\item[Preconditions] Fan is on a stable level floor with oscillation initially off.
+
+\item[Input] Speed 1, speed 3, then speed 3 with oscillation
+
+\item[Steps] 1. Listen and observe at speed 1 for 15 seconds.\\ 2. Repeat at speed 3.\\ 3. Enable oscillation and observe one complete sweep.
+
+\item[Expected] The fan has no scraping, grinding, repeated clicking, grille contact or excessive vibration in any tested state.
+
+\item[Actual] At speed 3, the outer metal grille vibrates against the plastic retaining ring and produces a continuous loud rattling noise.
+
+\item[Verdict] FAIL
+
+\item[Source] AI initial batch
+
+\item[Edge case] -
+
+\item[Video] -
+
+\item[Issue] \url{https://github.com/bingsu1103/23120205-HW01-QA/issues/1}
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-13 Reconnect power from OFF state}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Verify that reconnecting power does not cause unintended startup when OFF is selected.
+
+\item[Preconditions] OFF button is selected; blades are fully stopped; tester's hands and plug area are dry.
+
+\item[Input] Normal unplug, 10-second wait and reconnect
+
+\item[Steps] 1. Confirm OFF is selected.\\ 2. Unplug by holding the plug, not the cord.\\ 3. Wait 10 seconds.\\ 4. Reconnect to the same normal outlet.\\ 5. Observe for 10 seconds without pressing a speed button.
+
+\item[Expected] The fan remains stopped after reconnection and shows no spark, burning smell or unexpected motor movement.
+
+\item[Actual] The fan remained off after power was reconnected while OFF had been selected before unplugging.
+
+\item[Verdict] PASS
+
+\item[Source] AI initial batch
+
+\item[Edge case] -
+
+\item[Video] -
+
+\item[Issue] -
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-14 Continuous 30-minute operation}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Verify stable operation during a normal extended-use period.
+
+\item[Preconditions] Fan is clean, unobstructed, upright and has clear ventilation around the motor housing.
+
+\item[Input] Speed 2 with oscillation ON for 30 minutes
+
+\item[Steps] 1. Start speed 2 and enable oscillation.\\ 2. Observe at the start, 15-minute point and 30-minute point.\\ 3. Stop immediately if smoke, sparking or burning smell occurs.
+
+\item[Expected] The fan operates continuously for 30 minutes without stopping, speed fluctuation, burning smell, smoke, sparking or new abnormal noise.
+
+\item[Actual] The fan operated normally and remained stable for 30 minutes, but the motor housing became slightly warm.
+
+\item[Verdict] PASS
+
+\item[Source] AI initial batch
+
+\item[Edge case] -
+
+\item[Video] -
+
+\item[Issue] -
+
+\end{description}
+
+\clearpage
+
+\subsubsection{TC-15 Manual counter-rotation during active oscillation}
+
+\begin{description}[style=nextline,leftmargin=3.2cm]
+
+\item[Objective] Assess the risk of a user forcing the fan head opposite to its powered oscillation direction.
+
+\item[Preconditions] The powered test is not approved for manual force. Manufacturer guidance and a guarded torque-limited fixture are required.
+
+\item[Input] Counter-rotation force applied to the fan head
+
+\item[Steps] 1. Review the manual and drive mechanism documentation.\\ 2. Do not push the grille or powered fan head by hand.\\ 3. Execute only with an approved guarded, torque-limited method; otherwise record the case as not executed.
+
+\item[Expected] The device does not expose hazardous force, overheating or permanent drive damage and resumes normal operation after force removal. No protective clutch or clicking sound is assumed without documentation.
+
+\item[Actual] The fan produced repeated clicking sounds and stopped while counter-force was applied. It resumed after release, but the oscillation sweep range shifted from its previous position.
+
+\item[Verdict] FAIL
+
+\item[Source] Student edge case
+
+\item[Edge case] EC-03
+
+\item[Video] -
+
+\item[Issue] \url{https://github.com/bingsu1103/23120205-HW01-QA/issues/7}
+
+\end{description}
+
+\subsection{Student edge cases missed by AI}
+
+\begin{longtable}{p{0.065\textwidth}p{0.065\textwidth}p{0.21\textwidth}p{0.28\textwidth}p{0.18\textwidth}}
+
+\caption{Student edge-case analysis}\\\toprule
+
+Edge & TC & Scenario & Why AI missed it & Execution status \\\midrule\endfirsthead
+
+\toprule Edge & TC & Scenario & Why AI missed it & Execution status \\\midrule\endhead
+
+EC-01 & TC-03 & Partial actuation of speed button & The AI treated the button as a binary input and omitted intermediate mechanical-contact travel. & PASS; returned to OFF without sticking. \\
+
+EC-02 & TC-07 & Obstruction during horizontal oscillation & The AI assumed an unobstructed environment and omitted external contact in the sweep path. & FAIL; abnormal jammed sound, then normal recovery. \\
+
+EC-03 & TC-15 & Manual counter-rotation during active oscillation & The AI assumed the drive would operate without direct counter-force from the user. & FAIL; clicking, temporary stop and shifted sweep after release. \\
+
+\bottomrule\end{longtable}
+
+The following screenshots document the student's addition of EC-01 through EC-03 in the AI conversation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.58\textheight,keepaspectratio]{\detokenize{../private-evidence/edge-cases/EC-01-conversation.jpg}}
+\caption{EC-01 student supplementation in the AI conversation}
+\label{fig:ec-01-conversation}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.58\textheight,keepaspectratio]{\detokenize{../private-evidence/edge-cases/EC-02-conversation.jpg}}
+\caption{EC-02 student supplementation in the AI conversation}
+\label{fig:ec-02-conversation}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.58\textheight,keepaspectratio]{\detokenize{../private-evidence/edge-cases/EC-03-conversation.jpg}}
+\caption{EC-03 student supplementation in the AI conversation}
+\label{fig:ec-03-conversation}
+\end{figure}
+
+\subsection{Reported physical-device defects}
+
+Seven GitHub Issues were created from the student's reported observations, including the later TC-07 and TC-15 failures. Their titles are bilingual so the technical defect and its Vietnamese meaning are both immediately clear. The updated Issues-list screenshot shows the repository, username and all seven issue titles.
+
+\begin{longtable}{p{0.09\textwidth}p{0.10\textwidth}p{0.51\textwidth}p{0.16\textwidth}}
+
+\caption{Physical-device defect summary}\\\toprule
+
+ID & TC & Defect & Severity \\\midrule\endfirsthead
+
+\toprule ID & TC & Defect & Severity \\\midrule\endhead
+
+PDEF-01 & TC-12 & Abnormal metal grille rattling at speed 3 - Lồng kim loại rung và kêu rè ở mức 3 & Medium \\
+
+PDEF-02 & TC-05 & Sluggish speed-button interlock release - Nút tốc độ nhả chậm khi chuyển nấc & Low-Medium \\
+
+PDEF-03 & TC-06 & Clicking and stutter at oscillation reversal - Tuốc năng khựng và kêu cạch khi đảo chiều & Medium \\
+
+PDEF-04 & TC-09 & Vertical tilt drifts downward - Góc nghiêng tự trôi xuống khi quạt chạy & Medium \\
+
+PDEF-05 & TC-11 & Base shifts during maximum oscillation - Chân đế xê dịch khi mức 3 kết hợp đảo gió & High \\
+
+PDEF-06 & TC-07 & Abnormal jamming sound during oscillation obstruction - Âm thanh kẹt bất thường khi cản chuyển động đảo gió & Pending triage \\
+
+PDEF-07 & TC-15 & Clicking, temporary stop and shifted sweep after counter-rotation - Kêu tạch tạch, dừng và lệch biên độ sau khi ép quay ngược & Medium \\
+
+\bottomrule\end{longtable}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth,height=0.62\textheight,keepaspectratio]{\detokenize{../private-evidence/github/git-issue-evidence.jpg}}
+\caption{GitHub Issues list showing username and seven physical-device defects}
+\label{fig:github-issues}
+\end{figure}
+
+\subsection{Execution videos}
+
+\begin{table}[H]\centering\caption{Narrated execution videos}
+
+\begin{tabular}{p{0.13\textwidth}p{0.13\textwidth}p{0.12\textwidth}p{0.48\textwidth}}\toprule
+
+Video & Test case & Verdict & URL \\\midrule
+
+VID-01 & TC-01 & PASS & \url{https://youtube.com/shorts/ncRoJ0TOyW4} \\
+
+VID-02 & TC-02 & PASS & \url{https://youtube.com/shorts/dEHpqJb9Cpk} \\
+
+VID-03 & TC-04 & PASS & \url{https://youtube.com/shorts/44FoBJqekYw} \\
+
+VID-04 & TC-08 & PASS & \url{https://youtube.com/shorts/Ty-5kzWVyJE} \\
+
+VID-05 & TC-10 & PASS & \url{https://youtube.com/shorts/QFgz7idx_Kk} \\
+
+\bottomrule\end{tabular}\end{table}
+
+All five links opened without the owner's account and each duration was below 60 seconds. The student confirmed that every video contains their voice and that all five results are PASS.
+
+\clearpage\section{AI Audit Report}
+
+The following entries use the required five-section audit structure. A single prompt-generated batch is counted as one audited artifact even when it contains multiple test cases. Full original outputs remain in the referenced repository artifacts.
+
+\subsection{AIA-01 Concise QA QC Role Mindmap}
+
+\textbf{1 Prompt and tool.} Gemini Flash, 00:20 27/09/2026. The prompt requested a concise beginner-friendly CTFL v4.0.1 mindmap with exactly five first-level branches and the seven main test activities.
+
+\textbf{2 AI output.} Full unchanged output: \path{ai/mindmap/ai-original.md}.
+
+\textbf{3 Verdict.} INCOMPLETE.
+
+\textbf{4 Reasoning.} The output included the requested branches and activities but omitted implementation from the Testing Role, misclassified the Test Progress Report, and made completion conditional only on exit criteria. These issues conflict with CTFL v4.0.1 Sections 1.4.5, 1.4.3 and 1.4.1.
+
+\textbf{5 Student fix.} Full corrected output: \path{ai/mindmap/corrected-mindmap.md}; the three changes are documented in Table 2.
+
+\subsection{AIA-02 Senko Standing Fan Initial Test Set}
+
+\textbf{1 Prompt and tool.} OpenAI Codex; exact chat timestamp remains pending. The prompt requested Requirement 3 test cases using the supplied Senko standing-fan characteristics.
+
+\textbf{2 AI output.} Full unchanged baseline: \path{ai/test-cases/ai-original-r3.md}.
+
+\textbf{3 Verdict.} INCOMPLETE.
+
+\textbf{4 Reasoning.} The batch covered the declared controls and normal operating combinations but assumed fully actuated controls, an unobstructed environment and no direct external force. It therefore omitted the three student edge cases and could not use model-specific limits because the product label and manual were unavailable.
+
+\textbf{5 Student fix.} The final workbook replaces three AI cases with EC-01 through EC-03, keeps exactly fifteen cases, records eight PASS and seven FAIL results, links five PASS execution videos and links seven verified GitHub Issues. All three student edge cases have detailed observations and final verdicts.
+
+\begin{table}[H]\centering\caption{AI audit accuracy ratio}
+
+\begin{tabular}{p{0.24\textwidth}p{0.18\textwidth}p{0.18\textwidth}}\toprule Verdict & Entries & Percentage \\\midrule
+
+VALID & 0 & 0\% \\
+
+INVALID & 0 & 0\% \\
+
+INCOMPLETE & 2 & 100\% \\
+
+Total & 2 & 100\% \\\bottomrule\end{tabular}\end{table}
+
+AI should be used to generate an initial structure, broaden test ideas and accelerate summarization when a student can verify the result against authoritative evidence. It should not be used as the final authority for safety-critical execution, historical facts, defect severity or personal evidence.
+
+\clearpage\section{AI Critique}
+
+AI was useful for producing a fast first draft, but the work in this assignment showed that fluent output is not the same as reliable evidence. In the software-defect review, the model repeatedly expanded a limited event into a universal claim, invented causes such as cyberattacks, overstated affected platforms, or assigned intent without support. These failures occurred because the questions contained misleading premises and the model often followed those premises instead of challenging them against primary sources. The mindmap had a different type of error: it looked structurally complete, yet it omitted test implementation from the Testing Role, placed a progress report under planning, and oversimplified when test completion occurs. In the physical-product task, AI covered normal operating paths but assumed clean binary controls and an unobstructed environment. It did not consider partial button travel or direct external force on the oscillation mechanism. At the same time, student-proposed edge cases also required review: assuming that the fan contains a protective clutch or that clicking is safe would be unsupported without the product manual. I therefore learned to treat AI output as a hypothesis set, not as an accepted answer. Every factual claim must be checked against a primary source, every expected result must be traceable to requirements or observable safe behavior, and every physical test must be screened for risk before execution. AI is most valuable for initial breadth and organization; human judgment remains responsible for evidence, safety, corrections and the final verdict.
+
+\section{Mandatory Disclosure}
+
+The QA/QC role mindmap and the initial physical-product test-case batch were initially generated by Gemini Flash and OpenAI Codex. I reviewed and modified the role responsibilities, work-product classification, completion relationship and physical-product test set, and I added EC-01, EC-02 and EC-03. The job evidence, device photograph, execution videos, personal voice, student-card evidence and signed forms are not AI-generated. The detailed AI Audit Report is attached as Appendix A. I confirm I did not use AI to generate any artifact listed in the prohibited category.
+
+\section{Self Assessment}
+
+This self-assessment is based only on evidence currently present in the workspace. The physical-product requirement is supported by fifteen executed cases, five videos, seven GitHub Issues and the updated Issues screenshot. Prompt-log timestamp metadata is treated as student supplied rather than independently verified.
+
+\begin{table}[H]\centering\caption{Provisional self-assessment}
+
+\begin{tabular}{p{0.47\textwidth}p{0.13\textwidth}p{0.13\textwidth}p{0.17\textwidth}}\toprule
+
+Criterion & Maximum & Claimed & Basis \\\midrule
+
+Job Market 2026+ & 40 & 40 & 10 jobs, 4 AI-related, screenshots available \\
+
+Software Defects 2022-2026 & 20 & 20 & 20 records and 20 AI-review corrections \\
+
+Physical-product test design and execution & 25 & 25 & All 15 cases executed with verdicts; 5 videos and all 7 Issues available \\
+
+AI-02 Audit Report & 8 & 3 & Two audit entries; prompt-log output and timestamp limitations remain \\
+
+AI Critique and AI-03 Disclosure & 4 & 4 & 243-word critique included; signed AI-03 attached \\
+
+AI-05 and anti-cheat artifacts & 3 & 3 & Signed AI-05, device photo, narrated videos, job screenshots and GitHub evidence available \\
+
+Total & 100 & 95 & Evidence-based self-assessment \\
+
+\bottomrule\end{tabular}\end{table}
