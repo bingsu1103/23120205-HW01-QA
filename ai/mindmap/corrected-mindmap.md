@@ -1,153 +1,77 @@
-# Corrected QA/QC Role Mindmap
+# Corrected ISTQB CTFL v4.0.1 QA/QC Role Mindmap
 
-Reference: ISTQB Certified Tester Foundation Level Syllabus v4.0.1, especially Sections 1.2.2 and 1.4.1–1.4.5.
+Reference: ISTQB Certified Tester Foundation Level Syllabus v4.0.1, Sections 1.4.1, 1.4.3 and 1.4.5.
 
 ```mermaid
 mindmap
-  root((QA QC and ISTQB Test Process))
-    Quality Assurance QA
-      Process oriented
-      Prevent defects
-      Improve development and test processes
-      Establish standards and procedures
-      Review process compliance
-      Use test results for continuous improvement
-    Quality Control QC
-      Product oriented
-      Detect defects
-      Evaluate product quality
-      Verify specified requirements
-      Validate stakeholder needs
-      Testing is a form of quality control
+  root((ISTQB CTFL v4.0.1 QA/QC Overview))
+    Quality Assurance and Quality Control
+      QA: Process-oriented preventive focus
+      QC: Product-oriented defect detection
+      Testing: Core QC activity for quality
     Testing Roles
       Test Management Role
-        Overall responsibility for test process and team
-        Lead test activities
-        Focus on planning
-        Focus on monitoring and control
-        Focus on completion
+        Defines test strategy and plan
+        Monitors and controls testing
       Testing Role
-        Overall responsibility for technical testing
-        Focus on analysis
-        Focus on design
-        Focus on implementation
-        Focus on execution
-      Role Assignment
-        Depends on project and product context
-        Depends on skills and organization
-        One person may perform both roles
-        Tasks may be shared by an Agile team
+        Analyzes, designs, implements, executes tests
+        Logs defects and reports results
     Main Test Activities
       Test Planning
-        Define test objectives
-        Select a context appropriate test approach
       Test Monitoring and Control
-        Monitor all test activities continuously
-        Compare actual progress with the plan
-        Take actions needed to meet objectives
       Test Analysis
-        Analyze the test basis
-        Identify testable features
-        Define and prioritize test conditions
-        Consider risks and risk levels
-        Evaluate testability and defects in test basis and object
-        Answer what to test
       Test Design
-        Elaborate conditions into test cases and other testware
-        Identify coverage items
-        Define test data requirements
-        Design environment requirements
-        Identify infrastructure and tools
-        Answer how to test
       Test Implementation
-        Create or acquire executable testware
-        Create procedures and manual or automated scripts
-        Organize procedures into test suites
-        Prepare test data
-        Prioritize and schedule procedures
-        Build and verify the test environment
       Test Execution
-        Run tests according to the execution schedule
-        Compare actual and expected results
-        Log test results
-        Analyze anomalies and likely causes
-        Report anomalies based on observed failures
       Test Completion
-        Create change requests or backlog items for unresolved work
-        Identify and archive or hand over reusable testware
-        Shut down the test environment to an agreed state
-        Record lessons learned and improvements
-        Create and communicate the completion report
     Important Test Work Products
       Planning Work Products
-        Test plan
-        Test schedule
-        Risk register
-        Entry criteria
-        Exit criteria
+        Test Plan
+        Test Schedule
       Monitoring and Control Work Products
-        Test progress reports
-        Documentation of control directives
-        Information about risks
-      Analysis Work Products
-        Prioritized test conditions
-        Defect reports for defects in the test basis
-      Design Work Products
-        Prioritized test cases
-        Test charters
-        Coverage items
-        Test data requirements
-        Test environment requirements
-      Implementation Work Products
-        Test procedures
-        Manual and automated test scripts
-        Test suites
-        Test data
-        Test execution schedule
-        Test environment items
-      Execution Work Products
-        Test logs
-        Defect reports
+        Test Progress Report
+      Analysis and Design Work Products
+        Test Conditions
+        Test Cases
+      Implementation and Execution Work Products
+        Test Procedures
+        Defect Reports
       Completion Work Products
-        Test completion report
-        Action items for improvement
-        Documented lessons learned
-        Change requests or product backlog items
+        Test Summary Report
     Activity Relationships
-      Planning determines objectives and approach
-      Monitoring and control continue throughout testing
-      Analysis identifies what to test
-      Design determines how to test
-      Implementation prepares executable testware and environment
-      Execution produces logged results and anomaly reports
-      Completion consolidates status and future actions
-      Activities are tailored to context
-      Activities may overlap iterate or run in parallel
-      Later findings may trigger earlier activities
-    Cross-cutting Traceability
-      Connects test basis and test conditions
-      Connects risks and test cases
-      Connects test cases and test results
-      Connects results and defects
-      Supports coverage evaluation
-      Supports monitoring control reporting and audits
+      Iterative and dynamic workflow
+      Monitoring and Control spans all phases
+      Analysis feeds Design and Implementation
+      Execution leads to Defect Reporting
+      Completion occurs at project milestones
 ```
 
-## Explanation of the main branches
+## Branch Explanations
 
-- **Quality Assurance and Quality Control:** QA is process-oriented and preventive, while testing is a product-oriented form of QC that helps detect defects and evaluate quality.
-- **Testing Roles:** ISTQB CTFL defines a test management role and a testing role. Their assignment depends on context, and the same person may perform both.
-- **Main Test Activities:** Planning establishes objectives and approach; monitoring and control run continuously; analysis, design, implementation and execution develop and run the tests; completion consolidates results and follow-up actions.
-- **Important Test Work Products:** The work products are grouped according to the activity that produces them, using the lists in Section 1.4.3.
-- **Activity Relationships:** The activities have a logical relationship but are tailored to context and may be iterative, overlapping or parallel.
-- **Cross-cutting Traceability:** Traceability is maintained across the process rather than being owned only by test analysis.
+### 1. Quality Assurance and Quality Control
 
-## Exactly three corrections made
+Quality Assurance focuses on process improvement and defect prevention, whereas Quality Control focuses on identifying defects in the software product. Testing is a major Quality Control activity that measures software quality and mitigates defect risk.
 
-| ID | Original AI issue | Correction in this version | ISTQB basis |
+### 2. Testing Roles
+
+ISTQB CTFL v4.0.1 defines two principal testing roles. The Test Management Role focuses mainly on planning, monitoring, control and completion, while the Testing Role focuses on analysis, design, implementation and execution.
+
+### 3. Main Test Activities
+
+The test process contains seven main activities. They form a logical workflow but can overlap, repeat or run in parallel depending on the project context.
+
+### 4. Important Test Work Products
+
+Test work products are produced by different test activities. For example, the test plan and schedule belong to planning, while the test progress report belongs to monitoring and control.
+
+### 5. Activity Relationships
+
+Monitoring and control continue throughout testing, while analysis, design, implementation and execution provide a logical flow. Test completion normally occurs at project milestones such as a release, the end of an iteration or completion of a test level.
+
+## Exactly Three Corrections
+
+| ID | Problem in the AI output | Student correction | ISTQB basis |
 |---|---|---|---|
-| M-01 | `Traceability links` were placed under analysis work products. | Traceability was moved to a cross-cutting branch connecting the test basis, testware, results and defects. | Section 1.4.4 |
-| M-02 | Monitoring/control products omitted risk information and substituted updated plans and schedules. | The branch now contains progress reports, documentation of control directives and information about risks. | Section 1.4.3 |
-| M-03 | Completion products included archived testware but omitted change requests. | Archiving remains a completion activity; the work products now include action items, documented lessons learned and change requests. | Sections 1.4.1 and 1.4.3 |
-
-The correction table above records the three findings and their ISTQB basis. The corresponding AI-assistance disclosure is recorded in `ai/ai-audit-report.md`.
+| M-01 | The Testing Role listed analysis, design and execution but omitted test implementation. | Added implementation to the Testing Role responsibilities. | Section 1.4.5 assigns test analysis, design, implementation and execution mainly to the Testing Role. |
+| M-02 | `Test Progress Report` was classified as a planning work product. | Moved it under Monitoring and Control Work Products and used `Test Schedule` as a planning example. | Section 1.4.3 lists test progress reports under test monitoring and control, while test schedules are planning work products. |
+| M-03 | Test completion was presented as occurring only after exit criteria are met. | Changed the relationship to milestone-based completion. | Section 1.4.1 states that test completion usually occurs at project milestones such as a release, the end of an iteration or test-level completion. |
